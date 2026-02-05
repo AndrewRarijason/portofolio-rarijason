@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes bounce-custom {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(20px);}
+}
+.animate-bounce-custom {
+  animation: bounce-custom 2s infinite;
+}
+
+@keyframes orbit1 {
+  0%   { transform: translate(0, 0) rotate(0deg);}
+  25%  { transform: translate(30px, 60px) rotate(90deg);}
+  50%  { transform: translate(0px, 120px) rotate(180deg);}
+  75%  { transform: translate(-30px, 60px) rotate(270deg);}
+  100% { transform: translate(0, 0) rotate(360deg);}
+}
+@keyframes orbit2 {
+  0%   { transform: translate(0, 0) rotate(0deg);}
+  25%  { transform: translate(40px, 40px) rotate(90deg);}
+  50%  { transform: translate(0px, 80px) rotate(180deg);}
+  75%  { transform: translate(-40px, 40px) rotate(270deg);}
+  100% { transform: translate(0, 0) rotate(360deg);}
+}
+@keyframes orbit3 {
+  0%   { transform: translate(0, 0) rotate(0deg);}
+  25%  { transform: translate(20px, 30px) rotate(90deg);}
+  50%  { transform: translate(0px, 60px) rotate(180deg);}
+  75%  { transform: translate(-20px, 30px) rotate(270deg);}
+  100% { transform: translate(0, 0) rotate(360deg);}
+}
+.animate-orbit1 { animation: orbit1 linear infinite; }
+.animate-orbit2 { animation: orbit2 linear infinite; }
+.animate-orbit3 { animation: orbit3 linear infinite; }
