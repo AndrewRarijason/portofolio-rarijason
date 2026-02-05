@@ -19,45 +19,45 @@ export const projectsData: ProjectData[] = [
     description_gm: "It was a CRM application developed in Java using GitHub. I mastered it, added important features, and created REST APIs that will be consumed by another application written in C#."
       + " I'll show some essential features below.",
     stack: "Java, Spring Boot, Hibernate, Thymeleaf, C#, Mysql.",
-    imagebg: { src: "/Crm/crm_analytics.png", alt: "Custom Relationship Management Background" },
+    imagebg: { src: "/CRM/crm_analytics.png", alt: "Custom Relationship Management Background" },
     images: [
       {
-        src: "/Crm/java-data_importation.png",
+        src: "/CRM/java-data_importation.png",
         alt: "Data importation",
         caption: "Data file importation into database",
         explanation: "Section for importing the list of clients, budgets and expenses into the Mysql database with exception handling."
       },
       {
-        src: "/Crm/java-user_list.png",
+        src: "/CRM/java-user_list.png",
         alt: "User list",
         caption: "User list",
         explanation: "With the manager role, you can view the list of users with their roles (manager, employee, customer) and CRUD operations."
       },
       {
-        src: "/Crm/java-customer_list.png",
+        src: "/CRM/java-customer_list.png",
         alt: "Customer list",
         caption: "Customer list",
         explanation: "We also have a list for customer information with a CSV export function."
       },
       {
-        src: "/Crm/dotnet-budget_statistics.png",
+        src: "/CRM/dotnet-budget_statistics.png",
         alt: "Budget statistics",
         caption: "Budget statistics",
         explanation: "The C# section will be used to display the statistics. Here we have the budget statistics, showing the top 10 budget-expenditure allocation."
       }, {
-        src: "/Crm/dotnet-distribution_of_expenses.png",
+        src: "/CRM/dotnet-distribution_of_expenses.png",
         alt: "Distribution of expenses",
         caption: "Distribution of expenses",
         explanation: "We also have the breakdown of expenses, which includes the total leads and tickets."
       },
       {
-        src: "/Crm/dotnet-importation.png",
+        src: "/CRM/dotnet-importation.png",
         alt: "CSV file importation in C#",
         caption: "CSV file importation in C#",
         explanation: "We have a customer import section where the customer data will be inserted into the database used by the Java application. If there is a duplicate customer, then the customer name will be preceded by \"copy_\"."
       },
       {
-        src: "/Crm/dotnet-budget_list.png",
+        src: "/CRM/dotnet-budget_list.png",
         alt: "Budget list",
         caption: "Budget list",
         explanation: "In the statistics section, you can view lists of budgets, expenses, tickets, and leads by clicking on the graph. Here's an example of the budget list."
