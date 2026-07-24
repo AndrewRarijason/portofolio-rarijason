@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaWordpress } from "react-icons/fa";
 import { GrMysql } from "react-icons/gr";
 import { useEffect, useRef, useState } from "react";
+import { SiPrisma } from "react-icons/si";
 
 export default function Skills() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -236,158 +237,207 @@ export default function Skills() {
               />
               <span className="block text-[14px] text-center mt-2">PostgreSQL</span>
             </li>
+            <li className="flex flex-col items-center">
+              <Image
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg"
+                alt="Tailwind CSS"
+                width={60}
+                height={60}
+                className="w-10 h-10"
+              />
+              <span className="block text-[14px] text-center mt-2">Tailwind CSS</span>
+            </li>
+            <li className="flex flex-col items-center">
+              <Image
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
+                alt="Express.js"
+                width={60}
+                height={60}
+                className="w-10 h-10"
+              />
+              <span className="block text-[14px] text-center mt-2">Express.js</span>
+            </li>
+            <li className="flex flex-col items-center">
+              <Image
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                alt="Node.js"
+                width={60}
+                height={60}
+                className="w-10 h-10"
+              />
+              <span className="block text-[14px] text-center mt-2">
+                Node.js
+              </span>
+            </li>
+            <li className="flex flex-col items-center mt-1.5">
+              <SiPrisma className="text-[34px]" />
+              <span className="block text-[14px] text-center mt-2">
+                Prisma
+              </span>
+            </li>
           </ul>
 
-          {/* --- VERSION DESKTOP (md+) : ton layout actuel, inchangé --- */}
-          <div className="hidden md:flex md:flex-col">
-            {/* Ligne 1 */}
-            <ul className="flex flex-wrap justify-center sm:justify-between gap-y-6 gap-x-4 sm:gap-x-10 sm:gap-y-8">
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+          {/* --- VERSION DESKTOP (md+) : grid 4 colonnes sur 4 lignes --- */}
+          <div className="hidden md:block">
+            <ul className="grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
+              {/* Ligne 1 */}
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
                   alt="HTML5"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  HTML5
-                </span>
+                <span className="block text-sm text-center mt-2">HTML5</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
                   alt="CSS3"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  CSS3
-                </span>
+                <span className="block text-sm text-center mt-2">CSS3</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
                   alt="JavaScript"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  JavaScript
-                </span>
+                <span className="block text-sm text-center mt-2">JavaScript</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
                   alt="React"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  React
-                </span>
+                <span className="block text-sm text-center mt-2">React</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+
+              {/* Ligne 2 */}
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
                   alt="Next.js"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  Next.js
-                </span>
+                <span className="block text-sm text-center mt-2">Next.js</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
                   alt="Angular"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  Angular
-                </span>
+                <span className="block text-sm text-center mt-2">Angular</span>
               </li>
-            </ul>
-
-            {/* Ligne 2 */}
-            <ul className="flex flex-wrap justify-center sm:justify-between gap-y-6 gap-x-4 sm:gap-x-10 sm:gap-y-8 mt-10 sm:mt-12">
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
                   alt="TypeScript"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  TypeScript
-                </span>
+                <span className="block text-sm text-center mt-2">TypeScript</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
                   alt="Java"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  Java
-                </span>
+                <span className="block text-sm text-center mt-2">Java</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+
+              {/* Ligne 3 */}
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
                   alt="Spring"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  Spring
-                </span>
+                <span className="block text-sm text-center mt-2">Spring</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg"
                   alt="Oracle"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  Oracle
-                </span>
+                <span className="block text-sm text-center mt-2">Oracle</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
-                <GrMysql className="text-[32px] sm:text-[60px]" />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  MySQL
-                </span>
+              <li className="flex flex-col items-center">
+                <GrMysql className="text-[60px]" />
+                <span className="block text-sm text-center mt-2">MySQL</span>
               </li>
-              <li className="flex flex-col items-center w-1/5 sm:w-auto">
+              <li className="flex flex-col items-center">
                 <Image
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
                   alt="PostgreSQL"
                   width={60}
                   height={60}
-                  className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                  className="w-[60px] h-[60px]"
                 />
-                <span className="block text-[14px] sm:text-xs text-center mt-2">
-                  PostgreSQL
-                </span>
+                <span className="block text-sm text-center mt-2">PostgreSQL</span>
+              </li>
+
+              {/* Ligne 4 */}
+              <li className="flex flex-col items-center">
+                <Image
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg"
+                  alt="Tailwind CSS"
+                  width={60}
+                  height={60}
+                  className="w-[60px] h-[60px]"
+                />
+                <span className="block text-sm text-center mt-2">Tailwind CSS</span>
+              </li>
+              <li className="flex flex-col items-center">
+                <Image
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
+                  alt="Express.js"
+                  width={60}
+                  height={60}
+                  className="w-[60px] h-[60px]"
+                />
+                <span className="block text-sm text-center mt-2">Express.js</span>
+              </li>
+              <li className="flex flex-col items-center">
+                <Image
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                  alt="Node.js"
+                  width={60}
+                  height={60}
+                  className="w-[60px] h-[60px]"
+                />
+                <span className="block text-sm text-center mt-2">Node.js</span>
+              </li>
+              <li className="flex flex-col items-center">
+                <SiPrisma className="text-[60px]" />
+                <span className="block text-sm text-center mt-2">Prisma</span>
               </li>
             </ul>
           </div>
         </div>
-
 
         {/* Others */}
         <div className="flex flex-col">
@@ -451,59 +501,71 @@ export default function Skills() {
             </li>
           </ul>
 
-          {/* DESKTOP (md+) : layout actuel conservé */}
-          <ul className="hidden md:flex flex-wrap justify-center sm:justify-between gap-y-6 gap-x-4 sm:gap-x-10 sm:gap-y-8">
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+          {/* DESKTOP (md+) : grid 4 colonnes */}
+          <ul className="hidden md:grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
                 alt="GitHub"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 GitHub
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg"
                 alt="Docker"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 Docker
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-original.svg"
                 alt="AdobeXD"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 Adobe XD
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
                 alt="Figma"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 Figma
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
-              <FaWordpress className="text-[32px] sm:text-[60px]" />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+            <li className="flex flex-col items-center">
+              <Image
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg"
+                alt="Nginx"
+                width={60}
+                height={60}
+                className="w-[60px] h-[60px]"
+              />
+              <span className="block text-sm text-center mt-2">
+                Nginx
+              </span>
+            </li>
+            <li className="flex flex-col items-center">
+              <FaWordpress className="text-[60px]" />
+              <span className="block text-sm text-center mt-2">
                 WordPress
               </span>
             </li>
@@ -543,18 +605,6 @@ export default function Skills() {
             </li>
             <li className="flex flex-col items-center">
               <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
-                alt="Node.js"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Node.js
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
                 alt="Laravel"
                 width={60}
@@ -580,64 +630,52 @@ export default function Skills() {
           </ul>
 
           {/* DESKTOP (md+) : layout actuel conservé */}
-          <ul className="hidden md:flex flex-wrap justify-center sm:justify-between gap-y-6 gap-x-4 sm:gap-x-10 sm:gap-y-8">
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+          <ul className="hidden md:grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
                 alt="PHP"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 PHP
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
                 alt="Python"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 Python
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
-                alt="Node.js"
-                width={60}
-                height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
-              />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
-                Node.js
-              </span>
-            </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
                 alt="Laravel"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 Laravel
               </span>
             </li>
-            <li className="flex flex-col items-center w-1/5 sm:w-auto">
+            <li className="flex flex-col items-center">
               <Image
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg"
                 alt="C#"
                 width={60}
                 height={60}
-                className="w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                className="w-[60px] h-[60px]"
               />
-              <span className="block text-[14px] sm:text-xs text-center mt-2">
+              <span className="block text-sm text-center mt-2">
                 C#
               </span>
             </li>

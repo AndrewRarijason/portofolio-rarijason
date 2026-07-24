@@ -223,8 +223,38 @@ export const projectsData: ProjectData[] = [
     overlayOpacity: "bg-black/50"
   },
 
-
   /* 5 */
+  // {
+  //   slug: "parcflow",
+  //   title: "Parcflow - Vehicle fleet management system",
+  //   description: "Smart management of vehicles and their maintenance.",
+  //   description_gm: "A solution for managing your vehicle fleet, featuring maintenance tracking, automated alerts, and mileage management.",
+  //   stack: "Node.js, Express.js, Prisma, Next typescript, tailwind CSS, .",
+  //   imagebg: { src: "/parcflow/website.png", alt: "Parcflow Website Background" },
+  //   images: [
+  //     {
+  //       src: "/parcflow/website-mobile.png",
+  //       alt: "Mobile version",
+  //       caption: "Mobile version",
+  //       explanation: "This is the mobile version of the site where you can find the homepage."
+  //     },
+  //     {
+  //       src: "/parcflow/website-bilingue.png",
+  //       alt: "Bilingual website",
+  //       caption: "Bilingual website",
+  //       explanation: "The website is bilingual (French and English)"
+  //     },
+  //     {
+  //       src: "/parcflow/website-hosting.png",
+  //       alt: "Website hosting",
+  //       caption: "Website hosting",
+  //       explanation: "Website hosting on a server. Installation of the SSL certificate, configuration of database, creation and configuration of the website email addresses."
+  //     }
+  //   ],
+  //   overlayOpacity: "bg-black/60"
+  // },
+
+  /* 6 */
   {
     slug: "manafides",
     title: "Website development",

@@ -89,7 +89,7 @@ export default function Hero() {
             `}
           >
             <Image
-              src="/img.png"
+              src="/andrew.png"
               alt="Andrew"
               width={300}
               height={300}
