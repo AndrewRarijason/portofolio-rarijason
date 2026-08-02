@@ -12,8 +12,7 @@ export default function Skills() {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
-  // Points de chaque sous-division (en pourcentage de la hauteur)
-  const points = [0, 0.4, 0.75, 1];
+  const points = [0, 0.45, 0.85];
 
   useEffect(() => {
     function handleScroll() {
@@ -21,12 +20,10 @@ export default function Skills() {
       const barRect = progressBarRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calcul du centre de la fenêtre
       const centerY = windowHeight / 2;
       const barTop = barRect.top;
       const barHeight = barRect.height;
 
-      // Si la barre est complètement hors écran
       if (barTop > windowHeight) {
         setProgress(0);
         return;
@@ -36,7 +33,6 @@ export default function Skills() {
         return;
       }
 
-      // Calcul de la progression par rapport au centre de l'écran
       let prog = (centerY - barTop) / barHeight;
       prog = Math.max(0, Math.min(1, prog));
       setProgress(prog);
@@ -50,7 +46,6 @@ export default function Skills() {
     };
   }, []);
 
-  // Pour placer la barre à la même hauteur que la div des icônes
   useEffect(() => {
     if (!iconsRef.current || !progressBarRef.current) return;
     const offsetTop = iconsRef.current.offsetTop;
@@ -59,627 +54,159 @@ export default function Skills() {
     progressBarRef.current.style.height = `${iconsHeight}px`;
   }, []);
 
+  const usingNowTechs = [
+    { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+    { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+    { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" },
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+    { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+    { name: "Spring", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
+    { name: "Oracle", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
+    { name: "MySQL", customIcon: <GrMysql className="text-4xl sm:text-5xl text-blue-500 dark:text-blue-400" /> },
+    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg" },
+    { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+    { name: "Prisma", customIcon: <SiPrisma className="text-4xl sm:text-5xl text-slate-800 dark:text-slate-100" /> },
+  ];
+
+  const otherTechs = [
+    { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg" },
+    { name: "Adobe XD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-original.svg" },
+    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+    { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" },
+    { name: "WordPress", customIcon: <FaWordpress className="text-4xl sm:text-5xl text-blue-500 dark:text-blue-400" /> },
+  ];
+
+  const learningTechs = [
+    { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" },
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+    { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
+    { name: "C#", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" },
+    { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg" },
+  ];
+
   return (
-    <section
-      id="skills"
-      className="pt-26 px-6 bg-[#394054] pb-20 text-white relative"
-      ref={sectionRef}
-    >
-      <div className="text-center mb-12 pb-8">
-        <h2>
-          <span className="border-4 text-[24px] px-14 py-4 font-bold mb-4">
-            SKILLS
-          </span>
-        </h2>
+    <section id="skills" className="relative overflow-hidden py-28 px-4 sm:px-6 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300" ref={sectionRef}>
+      
+      {/* Background Orbs */}
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+
+      {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="vectorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#a855f7" stopOpacity="0.8" />
+            </linearGradient>
+
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Réseau de Lignes Vectorielles Animées */}
+          <path
+            d="M -100 150 L 300 150 L 500 450 L 200 800 L 900 800 L 1200 300 L 1600 600"
+            fill="none"
+            stroke="url(#vectorGrad)"
+            strokeWidth="3"
+            filter="url(#glow)"
+            strokeDasharray="180 120"
+            className="animate-vector-flow"
+          />
+          <path
+            d="M 200 50 L 700 250 L 400 650 L 1100 950 L 1500 400"
+            fill="none"
+            stroke="url(#vectorGrad)"
+            strokeWidth="2"
+            strokeDasharray="100 200"
+            className="animate-vector-flow-reverse opacity-60"
+          />
+
+          {/* Sommets / Nœuds du vecteur avec effet de pulsation */}
+          <circle cx="300" cy="150" r="5" fill="#06b6d4" className="animate-ping origin-center text-cyan-400 opacity-75" />
+          <circle cx="300" cy="150" r="4" fill="#06b6d4" filter="url(#glow)" />
+
+          <circle cx="500" cy="450" r="6" fill="#3b82f6" filter="url(#glow)" />
+
+          <circle cx="900" cy="800" r="5" fill="#a855f7" className="animate-ping origin-center text-purple-500 opacity-75" />
+          <circle cx="900" cy="800" r="4" fill="#a855f7" filter="url(#glow)" />
+
+          <circle cx="1200" cy="300" r="6" fill="#06b6d4" filter="url(#glow)" />
+        </svg>
       </div>
 
-      {/* Barre de progression absolute à gauche, alignée avec la div des icônes (cachée sur très petits écrans) */}
-      <div
-        ref={progressBarRef}
-        className="hidden sm:flex absolute left-8 md:left-16 lg:left-22 flex-col items-center z-20"
-        style={{ minWidth: 32, width: 32, top: 0, height: 0 }}
-      >
-        {/* Barre de fond */}
-        <div
-          className="w-2 bg-white/20 rounded-full absolute left-1/2 -translate-x-1/2"
-          style={{ height: "100%" }}
-        />
-        {/* Barre de progression */}
-        <div
-          className="w-2 bg-[#5DA5B3] rounded-full absolute left-1/2 -translate-x-1/2 top-0 transition-all duration-300"
-          style={{
-            height: `${progress * 100}%`,
-            maxHeight: "100%",
-          }}
-        />
-        {/* Points */}
+      <div className="text-center mb-16 relative z-10">
+        <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">Technical Proficiency</span>
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Tools</span>
+        </h2>
+        <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
+      </div>
+
+      {/* Progress Bar interactive */}
+      <div ref={progressBarRef} className="hidden lg:flex absolute left-12 flex-col items-center z-20" style={{ width: 16 }}>
+        <div className="w-1 bg-slate-300 dark:bg-slate-800 rounded-full absolute left-1/2 -translate-x-1/2 h-full" />
+        <div className="w-1 bg-gradient-to-b from-cyan-400 to-blue-500 shadow-[0_0_12px_#06b6d4] rounded-full absolute left-1/2 -translate-x-1/2 top-0 transition-all duration-300" style={{ height: `${progress * 100}%` }} />
         {points.map((p, i) => (
-          <span
-            key={i}
-            className="absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-300"
-            style={{
-              top: `calc(${p * 100}% - 8px)`,
-              width: "16px",
-              height: "16px",
-              background: progress >= p ? "#5DA5B3" : "#fff",
-              boxShadow: progress >= p ? "0 0 0 4px #5DA5B388" : "none",
-              zIndex: 10,
-              border: "none",
-            }}
-          />
+          <span key={i} className="absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-300" style={{ top: `calc(${p * 100}% - 6px)`, width: "12px", height: "12px", background: progress >= p ? "#06b6d4" : "#cbd5e1", boxShadow: progress >= p ? "0 0 10px #06b6d4" : "none" }} />
         ))}
       </div>
 
-      {/* Div principale des icônes */}
-      <div
-        className="flex flex-col gap-16 md:gap-20 w-full sm:w-[80%] lg:w-[60%] mx-auto"
-        ref={iconsRef}
-      >
-        {/* Using now */}
-        <div className="flex flex-col">
-          <h3 className="font-semibold mb-6 text-xl sm:text-xl">Using now</h3>
-
-          {/* --- VERSION MOBILE (<= md) : grid 4 colonnes, 4 icônes max par ligne --- */}
-          <ul className="grid grid-cols-4 gap-y-6 gap-x-10 md:hidden">
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
-                alt="HTML5"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">HTML5</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
-                alt="CSS3"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">CSS3</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
-                alt="JavaScript"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">JavaScript</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
-                alt="React"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">React</span>
-            </li>
-
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
-                alt="Next.js"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Next.js</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
-                alt="Angular"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Angular</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
-                alt="TypeScript"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">TypeScript</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
-                alt="Java"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Java</span>
-            </li>
-
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
-                alt="Spring"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Spring</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg"
-                alt="Oracle"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Oracle</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <GrMysql className="text-[32px] mt-2 mt:pt-0" />
-              <span className="block text-[14px] text-center mt-2">MySQL</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
-                alt="PostgreSQL"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">PostgreSQL</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg"
-                alt="Tailwind CSS"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Tailwind CSS</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
-                alt="Express.js"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">Express.js</span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
-                alt="Node.js"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[14px] text-center mt-2">
-                Node.js
-              </span>
-            </li>
-            <li className="flex flex-col items-center mt-1.5">
-              <SiPrisma className="text-[34px]" />
-              <span className="block text-[14px] text-center mt-2">
-                Prisma
-              </span>
-            </li>
-          </ul>
-
-          {/* --- VERSION DESKTOP (md+) : grid 4 colonnes sur 4 lignes --- */}
-          <div className="hidden md:block">
-            <ul className="grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
-              {/* Ligne 1 */}
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
-                  alt="HTML5"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">HTML5</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
-                  alt="CSS3"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">CSS3</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
-                  alt="JavaScript"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">JavaScript</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
-                  alt="React"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">React</span>
-              </li>
-
-              {/* Ligne 2 */}
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
-                  alt="Next.js"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Next.js</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
-                  alt="Angular"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Angular</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
-                  alt="TypeScript"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">TypeScript</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
-                  alt="Java"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Java</span>
-              </li>
-
-              {/* Ligne 3 */}
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
-                  alt="Spring"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Spring</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg"
-                  alt="Oracle"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Oracle</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <GrMysql className="text-[60px]" />
-                <span className="block text-sm text-center mt-2">MySQL</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
-                  alt="PostgreSQL"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">PostgreSQL</span>
-              </li>
-
-              {/* Ligne 4 */}
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg"
-                  alt="Tailwind CSS"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Tailwind CSS</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
-                  alt="Express.js"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Express.js</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
-                  alt="Node.js"
-                  width={60}
-                  height={60}
-                  className="w-[60px] h-[60px]"
-                />
-                <span className="block text-sm text-center mt-2">Node.js</span>
-              </li>
-              <li className="flex flex-col items-center">
-                <SiPrisma className="text-[60px]" />
-                <span className="block text-sm text-center mt-2">Prisma</span>
-              </li>
-            </ul>
+      <div className="max-w-5xl mx-auto space-y-16 relative z-10" ref={iconsRef}>
+        {/* USING NOW */}
+        <div>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-cyan-500 pl-3">Using now</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 sm:gap-6">
+            {usingNowTechs.map((tech, idx) => (
+              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-cyan-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+                {tech.icon ? (
+                  <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] transition-all" />
+                ) : (
+                  tech.customIcon
+                )}
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Others */}
-        <div className="flex flex-col">
-          <h3 className="font-semibold mb-6 text-xl sm:text-xl">Others</h3>
-
-          {/* MOBILE (<= md) : grid 4 colonnes, 5e icône sur 2e ligne à gauche */}
-          <ul className="grid grid-cols-4 gap-y-6 gap-x-10 md:hidden">
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
-                alt="GitHub"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                GitHub
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg"
-                alt="Docker"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Docker
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-original.svg"
-                alt="AdobeXD"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Adobe XD
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
-                alt="Figma"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Figma
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <FaWordpress className="text-[32px]" />
-              <span className="block text-[12px] text-center mt-2">
-                WordPress
-              </span>
-            </li>
-          </ul>
-
-          {/* DESKTOP (md+) : grid 4 colonnes */}
-          <ul className="hidden md:grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
-                alt="GitHub"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                GitHub
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg"
-                alt="Docker"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Docker
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-original.svg"
-                alt="AdobeXD"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Adobe XD
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
-                alt="Figma"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Figma
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg"
-                alt="Nginx"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Nginx
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <FaWordpress className="text-[60px]" />
-              <span className="block text-sm text-center mt-2">
-                WordPress
-              </span>
-            </li>
-          </ul>
+        {/* OTHERS */}
+        <div>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-blue-500 pl-3">Tools & Environment</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6">
+            {otherTechs.map((tech, idx) => (
+              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+                {tech.icon ? (
+                  <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.4)] transition-all" />
+                ) : (
+                  tech.customIcon
+                )}
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-
-        {/* Learning */}
-        <div className="flex flex-col">
-          <h3 className="font-semibold mb-6 text-xl sm:text-xl">Learning</h3>
-
-          {/* MOBILE (<= md) : grid 4 colonnes, 5e icône sur 2e ligne à gauche */}
-          <ul className="grid grid-cols-4 gap-y-6 gap-x-10 md:hidden">
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
-                alt="PHP"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                PHP
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-                alt="Python"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Python
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
-                alt="Laravel"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                Laravel
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg"
-                alt="C#"
-                width={60}
-                height={60}
-                className="w-10 h-10"
-              />
-              <span className="block text-[12px] text-center mt-2">
-                C#
-              </span>
-            </li>
-          </ul>
-
-          {/* DESKTOP (md+) : layout actuel conservé */}
-          <ul className="hidden md:grid grid-cols-4 gap-y-8 gap-x-6 justify-items-center">
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
-                alt="PHP"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                PHP
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-                alt="Python"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Python
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
-                alt="Laravel"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                Laravel
-              </span>
-            </li>
-            <li className="flex flex-col items-center">
-              <Image
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg"
-                alt="C#"
-                width={60}
-                height={60}
-                className="w-[60px] h-[60px]"
-              />
-              <span className="block text-sm text-center mt-2">
-                C#
-              </span>
-            </li>
-          </ul>
+        {/* LEARNING */}
+        <div>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-purple-500 pl-3">Continuously Learning</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4 sm:gap-6">
+            {learningTechs.map((tech, idx) => (
+              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-purple-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+                <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.4)] transition-all" />
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="mt-16 py-6 text-center text-xs text-gray-500 border-t border-gray-800">
-      © {new Date().getFullYear()} Andrew Rarijason.
+    <footer className="py-8 bg-slate-100 dark:bg-[#0F172A] text-center text-xs text-slate-500 dark:text-slate-500 border-t border-slate-200 dark:border-slate-800/80 transition-colors duration-300">
+      <p>© {new Date().getFullYear()} Andrew Rarijason Portfolio.</p>
     </footer>
   );
 }

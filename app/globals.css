@@ -2,61 +2,89 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Scrollbar stylisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+/* Animations d'origine conservées */
 @keyframes bounce-custom {
-  0%, 100% { transform: translateY(0);}
-  50% { transform: translateY(20px);}
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(16px); }
 }
 .animate-bounce-custom {
-  animation: bounce-custom 2s infinite;
+  animation: bounce-custom 2s infinite ease-in-out;
 }
 
 @keyframes orbit1 {
-  0%   { transform: translate(0, 0) rotate(0deg);}
-  25%  { transform: translate(30px, 60px) rotate(90deg);}
-  50%  { transform: translate(0px, 120px) rotate(180deg);}
-  75%  { transform: translate(-30px, 60px) rotate(270deg);}
-  100% { transform: translate(0, 0) rotate(360deg);}
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(30px, 60px) rotate(90deg); }
+  50%  { transform: translate(0px, 120px) rotate(180deg); }
+  75%  { transform: translate(-30px, 60px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
 }
+
 @keyframes orbit2 {
-  0%   { transform: translate(0, 0) rotate(0deg);}
-  25%  { transform: translate(40px, 40px) rotate(90deg);}
-  50%  { transform: translate(0px, 80px) rotate(180deg);}
-  75%  { transform: translate(-40px, 40px) rotate(270deg);}
-  100% { transform: translate(0, 0) rotate(360deg);}
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(40px, 40px) rotate(90deg); }
+  50%  { transform: translate(0px, 80px) rotate(180deg); }
+  75%  { transform: translate(-40px, 40px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
 }
+
 @keyframes orbit3 {
-  0%   { transform: translate(0, 0) rotate(0deg);}
-  25%  { transform: translate(20px, 30px) rotate(90deg);}
-  50%  { transform: translate(0px, 60px) rotate(180deg);}
-  75%  { transform: translate(-20px, 30px) rotate(270deg);}
-  100% { transform: translate(0, 0) rotate(360deg);}
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(20px, 30px) rotate(90deg); }
+  50%  { transform: translate(0px, 60px) rotate(180deg); }
+  75%  { transform: translate(-20px, 30px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
 }
-.animate-orbit1 { animation: orbit1 linear infinite; }
-.animate-orbit2 { animation: orbit2 linear infinite; }
-.animate-orbit3 { animation: orbit3 linear infinite; }
+
+.animate-orbit1 { animation: orbit1 8s linear infinite; }
+.animate-orbit2 { animation: orbit2 10s linear infinite; }
+.animate-orbit3 { animation: orbit3 12s linear infinite; }
+
+@keyframes vector-flow {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-vector-flow {
+  animation: vector-flow 15s linear infinite;
+}
+
+.animate-vector-flow-reverse {
+  animation: vector-flow 22s linear infinite reverse;
+}

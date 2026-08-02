@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { IoIosArrowDropup, IoIosMail } from "react-icons/io";
 import { IoSendSharp } from "react-icons/io5";
 import emailjs from "@emailjs/browser";
@@ -15,6 +15,7 @@ export default function Contact() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [cvLanguage, setCvLanguage] = useState<"en" | "fr">("en");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,15 +29,12 @@ export default function Contact() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Écouter l'état du menu envoyé par Header
   useEffect(() => {
     if (typeof window === "undefined") return;
-
     const handler = (event: Event) => {
       const customEvent = event as CustomEvent<boolean>;
       setIsMenuOpen(!!customEvent.detail);
     };
-
     window.addEventListener("menu-toggled", handler as EventListener);
     return () => window.removeEventListener("menu-toggled", handler as EventListener);
   }, []);
@@ -44,17 +42,11 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
-
     setSending(true);
     setSent(null);
 
     emailjs
-      .sendForm(
-        "service_64209gq",
-        "template_unjcm1o",
-        formRef.current,
-        "fZwRVO-t4y74AxE6l"
-      )
+      .sendForm("service_64209gq", "template_unjcm1o", formRef.current, "fZwRVO-t4y74AxE6l")
       .then(
         () => {
           setSending(false);
@@ -71,38 +63,74 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-14 px-6 sm:px-10 lg:px-0 lg:mx-20"
-    >
-      <div className="text-center mb-8 pt-10 pb-0 lg:pb-4">
-        <h2>
-          <span className="border-4 text-[24px] px-14 py-4 font-bold text-gray-800 mb-4 inline-block">
-            CONTACT
-          </span>
-        </h2>
+    <section id="contact" className="relative overflow-hidden py-28 px-4 sm:px-6 md:px-12 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 transition-colors duration-300">
+      
+      {/* Glow Orb */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+
+      {/* --- VECTEUR CONTACT : Réseau Convergent & Ondes --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="contactGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.8" />
+            </linearGradient>
+            <filter id="glowContact" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Lignes convergeant vers le formulaire */}
+          <path
+            d="M -50 800 L 400 500 L 500 200 L 900 150 L 1400 400 L 1600 100"
+            fill="none"
+            stroke="url(#contactGrad)"
+            strokeWidth="2.5"
+            strokeDasharray="150 100"
+            filter="url(#glowContact)"
+            className="animate-vector-flow"
+          />
+          <path
+            d="M 100 100 L 350 350 L 700 350 L 1200 650 L 1500 700"
+            fill="none"
+            stroke="url(#contactGrad)"
+            strokeWidth="2"
+            strokeDasharray="120 120"
+            className="animate-vector-flow-reverse opacity-60"
+          />
+
+          {/* Pulse Nodes */}
+          <circle cx="400" cy="500" r="5" fill="#06b6d4" filter="url(#glowContact)" />
+          <circle cx="700" cy="350" r="6" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
+          <circle cx="700" cy="350" r="4" fill="#06b6d4" />
+          <circle cx="1200" cy="650" r="5" fill="#3b82f6" filter="url(#glowContact)" />
+        </svg>
       </div>
 
-      {/* Paragraphe seul au-dessus de la rangée form + infos */}
-      <p className="max-w-5xl mx-auto w-full text-gray-800 text-left pb-4 mb-4">
-        You can reach me via this contact form or through my social media profiles.
-      </p>
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">Get in Touch</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Me</span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
+        </div>
 
-      {/* Rangée form + infos */}
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-start md:justify-start mt-2 md:mt-4 gap-10">
-        {/* Colonne gauche : formulaire uniquement */}
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start">
-          <form
-            ref={formRef}
-            className="mb-8 space-y-4 w-full max-w-lg"
-            onSubmit={handleSubmit}
-          >
+        <p className="text-slate-600 dark:text-slate-400 text-center max-w-xl mx-auto mb-12 text-sm sm:text-base">
+          Feel free to reach out using the form below or via my social profiles.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Formulaire */}
+          <form ref={formRef} onSubmit={handleSubmit} className="p-8 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl space-y-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <input
                 type="text"
                 name="first_name"
                 placeholder="First name"
-                className="w-full sm:w-1/2 border border-gray-600 rounded px-3 py-2 text-gray-800 placeholder-gray-400"
+                className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
@@ -111,110 +139,90 @@ export default function Contact() {
                 type="text"
                 name="last_name"
                 placeholder="Last name"
-                className="w-full sm:w-1/2 border border-gray-600 rounded px-3 py-2 text-gray-800 placeholder-gray-400"
+                className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
             </div>
 
-            <input
-              type="hidden"
-              name="name"
-              value={`${firstName} ${lastName}`.trim()}
-            />
+            <input type="hidden" name="name" value={`${firstName} ${lastName}`.trim()} />
 
             <input
               type="text"
               name="title"
-              placeholder="Object"
-              className="w-full border border-gray-600 rounded px-3 py-2 text-gray-800 placeholder-gray-400"
+              placeholder="Subject"
+              className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
 
             <input
               type="email"
               name="email"
-              placeholder="Your email"
-              className="w-full border border-gray-600 rounded px-3 py-2 text-gray-800 placeholder-gray-400"
+              placeholder="Your Email"
+              className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
 
             <textarea
               name="message"
               placeholder="Message"
-              className="w-full border border-gray-600 rounded px-3 py-2 h-32 resize-none text-gray-800 placeholder-gray-400"
+              className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 h-32 resize-none text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
 
             <button
               type="submit"
               disabled={sending}
-              className="bg-[#5DA5B3] text-white px-6 py-2 rounded hover:bg-[#397a86] transition flex flex-row items-center gap-2 hover:scale-105 disabled:opacity-60"
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white dark:text-slate-950 font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 disabled:opacity-50 cursor-pointer"
             >
-              {sending ? "Sending..." : "Send"} <IoSendSharp />
+              {sending ? "Sending..." : "Send Message"} <IoSendSharp />
             </button>
 
-            {sent === "ok" && (
-              <p className="text-green-600 text-sm mt-2">
-                Message sent successfully.
-              </p>
-            )}
-            {sent === "error" && (
-              <p className="text-red-600 text-sm mt-2">
-                An error occurred. Please try again.
-              </p>
-            )}
+            {sent === "ok" && <p className="text-cyan-600 dark:text-cyan-400 text-xs text-center mt-2">Message sent successfully!</p>}
+            {sent === "error" && <p className="text-red-500 dark:text-red-400 text-xs text-center mt-2">An error occurred. Please try again.</p>}
           </form>
-        </div>
 
-        {/* Colonne droite : infos, alignées avec le top du formulaire */}
-        <div className="w-full md:w-1/2 md:pl-0 lg:pl-12 flex flex-col justify-start">
-          <div className="space-y-4 max-w-xs md:max-w-sm text-sm text-gray-800 text-left mx-auto md:mx-0">
-            <p className="flex items-center gap-2">
-              <IoIosMail className="text-2xl text-[#397a86]" />
-              <a
-                href="mailto:rarijasonaiky@gmail.com"
-                className="text-blue-400 hover:underline break-all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                rarijasonaiky@gmail.com
+          {/* Socials & Resume Download */}
+          <div className="space-y-8 p-8 bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-slate-800/80 rounded-2xl shadow-lg">
+            <div className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+              <a href="mailto:rarijasonaiky@gmail.com" className="flex items-center gap-3 p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/40 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group">
+                <IoIosMail className="text-2xl text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="break-all font-medium">rarijasonaiky@gmail.com</span>
               </a>
-            </p>
-            <p className="flex items-center gap-2">
-              <FaGithub className="text-2xl text-[#397a86]" />
-              <a
-                href="https://github.com/AndrewRarijason"
-                className="text-blue-400 hover:underline break-all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                github.com/AndrewRarijason
+
+              <a href="https://github.com/AndrewRarijason" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/40 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group">
+                <FaGithub className="text-2xl text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="break-all font-medium">github.com/AndrewRarijason</span>
               </a>
-            </p>
-            <p className="flex items-center gap-2">
-              <FaLinkedinIn className="text-2xl text-[#397a86]" />
-              <a
-                href="https://www.linkedin.com/in/andrew-rarijason"
-                className="text-blue-400 hover:underline break-all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                linkedin.com/in/andrew-rarijason
+
+              <a href="https://www.linkedin.com/in/andrew-rarijason" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/40 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all group">
+                <FaLinkedinIn className="text-2xl text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="break-all font-medium">linkedin.com/in/andrew-rarijason</span>
               </a>
-            </p>
+            </div>
+
+            <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
+              <div className="flex gap-2 mb-4 bg-slate-100 dark:bg-slate-950/60 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+                <button onClick={() => setCvLanguage("en")} className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all ${cvLanguage === "en" ? "bg-cyan-500 text-white dark:text-slate-950" : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"}`}>English</button>
+                <button onClick={() => setCvLanguage("fr")} className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all ${cvLanguage === "fr" ? "bg-cyan-500 text-white dark:text-slate-950" : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"}`}>Français</button>
+              </div>
+
+              <a
+                href={cvLanguage === "en" ? "/cv/Resume_AndrewRarijason.pdf" : "/cv/CV_AndrewRarijason.pdf"}
+                download={cvLanguage === "en" ? "Resume_AndrewRarijason.pdf" : "CV_AndrewRarijason.pdf"}
+                className="w-full flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-300"
+              >
+                <FaDownload className="text-cyan-600 dark:text-cyan-400" /> Download {cvLanguage === "en" ? "English" : "French"} Resume
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
       {showArrow && !isMenuOpen && (
-        <a
-          href="#home"
-          className="fixed right-4 sm:right-8 bottom-6 sm:bottom-8 z-50"
-          aria-label="Remonter en haut"
-        >
-          <IoIosArrowDropup className="text-[42px] sm:text-[42px] hover:bg-[#394054] transition duration-300 cursor-pointer text-[#5DA5B3]" />
+        <a href="#home" className="fixed right-6 bottom-6 z-50 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:scale-110 shadow-xl shadow-cyan-500/10 transition-all" aria-label="Remonter">
+          <IoIosArrowDropup size={28} />
         </a>
       )}
     </section>

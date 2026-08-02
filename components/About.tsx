@@ -15,10 +15,8 @@ export default function About() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // md = 768px en Tailwind
     const isDesktop = window.innerWidth >= 768;
 
-    // Sur mobile / tablette (<= md) : pas d’animation, tout visible directement
     if (!isDesktop) {
       setTimeout(() => {
         setShowFormations(true);
@@ -27,7 +25,6 @@ export default function About() {
       return;
     }
 
-    // Sur écrans >= md : garder l’animation avec IntersectionObserver
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) {
@@ -35,20 +32,10 @@ export default function About() {
           setShowServices(false);
           return;
         }
-        const viewportHeight = window.innerHeight;
-        const sectionRect = entry.target.getBoundingClientRect();
-        const fromTop = sectionRect.top;
-        const fromBottom = viewportHeight - sectionRect.bottom;
-
-        if (fromTop > fromBottom) {
-          setShowFormations(true);
-          setTimeout(() => setShowServices(true), 700);
-        } else {
-          setShowServices(true);
-          setTimeout(() => setShowFormations(true), 700);
-        }
+        setShowFormations(true);
+        setTimeout(() => setShowServices(true), 300);
       },
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -56,228 +43,121 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="pt-20 px-6 bg-[#E0E2E8] pb-20" ref={sectionRef}>
-      <div className="w-[90%] mx-auto">
+    <section id="about" className="relative overflow-hidden py-28 px-4 sm:px-6 md:px-12 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-center transition-colors duration-300" ref={sectionRef}>
+      
+      {/* --- Animations fluides en mouvement perpétuel (Background Continuous Orbs) --- */}
+      <div className="absolute top-12 left-10 w-72 sm:w-96 h-72 sm:h-96 bg-cyan-500/10 dark:bg-cyan-500/15 rounded-full blur-[120px] animate-orbit1 pointer-events-none z-0" />
+      <div className="absolute bottom-12 right-10 w-80 sm:w-[450px] h-80 sm:h-[450px] bg-blue-600/10 dark:bg-blue-600/15 rounded-full blur-[130px] animate-orbit2 pointer-events-none z-0" />
+      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-teal-400/10 rounded-full blur-[100px] animate-orbit3 pointer-events-none z-0" />
+
+      <div className="relative z-10 max-w-6xl mx-auto space-y-20 w-full">
         {/* Titre de la section */}
-        <div className="text-center mb-12 pt-10 pb-4">
-          <h2>
-            <span
-              className={`
-                border-4 text-[24px] px-14 py-4 font-bold text-gray-800 mb-4 inline-block
-                transition-all duration-700
-                ${showFormations || showServices ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-              `}
-            >
-              ABOUT ME
-            </span>
+        <div className="text-center">
+          <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">
+            Background & Expertise
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Me</span>
           </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Contenu */}
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-26">
-          {/* FORMATIONS */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-3 mb-6 relative">
-              <div className="p-3">
-                <FaGraduationCap className="text-[48px] text-[#394054] absolute left-2 bottom-0 opacity-14" />
-              </div>
-              <h3 className="text-[20px] font-bold text-gray-800">FORMATIONS</h3>
+        {/* SECTION 1: FORMATIONS */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+              <FaGraduationCap size={24} />
             </div>
-
-            {/* Formations */}
-            <div className="flex flex-col sm:flex-row gap-6">
-              {/* Formation 1 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300
-                  transition-all
-                  ${showFormations ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex flex-col items-start gap-1 md:gap-0 md:flex-row md:justify-between md:items-start mb-2">
-                  <h4 className="text-lg lg:text-xl font-semibold text-gray-800">
-                    Bachelor degree with honors in Information Technology
-                  </h4>
-                  <button className="transition-transform duration-200 hover:-translate-y-1">
-                    <a href="https://www.ituniversity-mg.com">
-                      <span className="border-1 text-[#508E9A] text-sm font-medium px-3 py-1 rounded-xl truncate">
-                        IT University, Madagascar
-                      </span>
-                    </a>
-                  </button>
-                </div>
-                <p className="text-gray-600 min-h-[3.5rem]">
-                  <Typewriter
-                    text="Formation in web and design, databases and networks, with a specialization in development."
-                    start={showFormations}
-                    speed={8}
-                  />
-                </p>
-              </div>
-
-              {/* Formation 2 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300
-                  transition-all
-                  ${showFormations ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-lg lg:text-xl font-semibold text-gray-800">
-                    AI mastering
-                  </h4>
-                </div>
-                <p className="text-gray-600 min-h-[3.5rem]">
-                  <Typewriter
-                    text="By International Organisation of Employers and supported by Microsoft."
-                    start={showFormations}
-                    speed={8}
-                  />
-                </p>
-              </div>
-            </div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-wide">Formations</h3>
           </div>
 
-          <div className="space-y-8">
-            <div className="flex items-center gap-3 mb-6 relative">
-              <div className="p-3">
-                <GrCertificate className="text-[48px] text-[#394054] absolute left-2 bottom-0 opacity-14" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl transition-all duration-500 hover:border-cyan-500/30 ${showFormations ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                  Bachelor degree with honors in IT
+                </h4>
+                <a href="https://www.ituniversity-mg.com" target="_blank" rel="noopener noreferrer" className="self-start">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition-colors">
+                    IT University, MG
+                  </span>
+                </a>
               </div>
-              <h3 className="text-[20px] font-bold text-gray-800">Certifications</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[3rem]">
+                <Typewriter text="Formation in web and design, databases and networks, with a specialization in development." start={showFormations} speed={8} />
+              </p>
             </div>
 
-            {/* Certifications */}
-            <div className="flex flex-col sm:flex-row gap-6">
-              {/* Certification 1 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300
-                  transition-all
-                  ${showFormations ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex flex-col items-start gap-1 md:gap-0 md:flex-row md:justify-between md:items-start mb-2">
-                  <h4 className="text-lg lg:text-xl font-semibold text-gray-800">
-                    DELF B2
-                  </h4>
-                  <button className="transition-transform duration-200 hover:-translate-y-1">
-                    <a href="https://www.afantananarivo.mg/">
-                      <span className="border-1 text-[#508E9A] text-sm font-medium px-3 py-1 rounded-xl truncate">
-                        Alliance Française, Madagascar
-                      </span>
-                    </a>
-                  </button>
-                </div>
-                <p className="text-gray-600 min-h-[3.5rem]">
-                  <Typewriter
-                    text="Diplôme d'études en langue française (DELF) B2 level , awarded by the French Ministry of Education."
-                    start={showFormations}
-                    speed={8}
-                  />
-                </p>
+            <div className={`p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl transition-all duration-500 hover:border-cyan-500/30 ${showFormations ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <div className="mb-4">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white">AI mastering</h4>
               </div>
-
-              {/* Certification 2 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300
-                  transition-all
-                  ${showFormations ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-lg lg:text-xl font-semibold text-gray-800">
-                    English C2
-                  </h4>
-                </div>
-                <p className="text-gray-600 min-h-[3.5rem]">
-                  <Typewriter
-                    text="English C2 level certification, awarded by ITTI School of English, New York."
-                    start={showFormations}
-                    speed={8}
-                  />
-                </p>
-              </div>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[3rem]">
+                <Typewriter text="By International Organisation of Employers and supported by Microsoft." start={showFormations} speed={8} />
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* AREA SPECIALITY */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-3 mb-6 relative">
-              <div className="p-3">
-                <RiStackLine className="text-[48px] text-[#394054] absolute left-2 bottom-0 opacity-14" />
+        {/* SECTION 2: CERTIFICATIONS */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+              <GrCertificate size={24} />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-wide">Certifications</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl transition-all duration-500 hover:border-blue-500/30 ${showFormations ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white">DELF B2</h4>
+                <a href="https://www.afantananarivo.mg/" target="_blank" rel="noopener noreferrer" className="self-start">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 transition-colors">
+                    Alliance Française, MG
+                  </span>
+                </a>
               </div>
-              <h3 className="text-[20px] font-bold text-gray-800">AREA SPECIALITY</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[3rem]">
+                <Typewriter text="Diplôme d'études en langue française (DELF) B2 level, awarded by the French Ministry of Education." start={showFormations} speed={8} />
+              </p>
             </div>
 
-            {/* Services : colonne en ≤ sm, ligne au-delà */}
-            <div className="flex flex-col sm:flex-row gap-6">
-              {/* Service 1 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300 relative
-                  transition-all
-                  ${showServices ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex items-start gap-4 relative">
-                  <div className="flex-1">
-                    <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
-                      Back-End Architecture & APIs
-                    </h4>
-                    <p className="text-gray-700 mb-4 min-h-[3.5rem]">
-                      <Typewriter
-                        text="I design and develop robust server architectures, relational databases, secure REST APIs, and GraphQL services. I also specialize in modeling and optimizing application architectures."
-                        start={showServices}
-                        speed={8}
-                      />
-                    </p>
-                  </div>
-                  <div
-                    className="
-                      absolute
-                      top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                      md:top-12 md:left-60 md:-translate-x-0 md:-translate-y-0
-                    "
-                  >
-                    <FaLaptopCode className="text-[100px] text-gray-800 opacity-10" />
-                  </div>
-                </div>
+            <div className={`p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl transition-all duration-500 hover:border-blue-500/30 ${showFormations ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <div className="mb-4">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white">English C2</h4>
               </div>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[3rem]">
+                <Typewriter text="English C2 level certification, awarded by ITTI School of English, New York." start={showFormations} speed={8} />
+              </p>
+            </div>
+          </div>
+        </div>
 
-              {/* Service 2 */}
-              <div
-                className={`
-                  flex-1 p-6 shadow-lg hover:shadow-2xl duration-300 relative
-                  transition-all
-                  ${showServices ? "opacity-100 scale-100" : "opacity-0 scale-75"}
-                `}
-              >
-                <div className="flex items-start gap-4 relative">
-                  <div className="flex-1">
-                    <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
-                      Mobile & Front-End Interfaces
-                    </h4>
-                    <p className="text-gray-700 mb-4 min-h-[3.5rem]">
-                      <Typewriter
-                        text="I can create reactive User Interfaces, modern web applications, and cross-platform mobile solutions. Focus on the User Experience, performance, and accessibility across all devices."
-                        start={showServices}
-                        speed={8}
-                      />
-                    </p>
-                  </div>
-                  <div
-                    className="
-                      absolute
-                      top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                      md:top-12 md:left-60 md:-translate-x-0 md:-translate-y-0
-                    "
-                  >
-                    <MdAddToHomeScreen className="text-[100px] text-gray-800 opacity-10" />
-                  </div>
-                </div>
-              </div>
+        {/* SECTION 3: AREA SPECIALITY */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+              <RiStackLine size={24} />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-wide">Area Speciality</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`relative p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:border-cyan-500/30 ${showServices ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <FaLaptopCode className="absolute -right-4 -bottom-4 text-9xl text-slate-200 dark:text-cyan-500/5 pointer-events-none" />
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Back-End Architecture & APIs</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[4rem] relative z-10">
+                <Typewriter text="I design and develop robust server architectures, relational databases, secure REST APIs, and GraphQL services. I also specialize in modeling and optimizing application architectures." start={showServices} speed={8} />
+              </p>
+            </div>
+
+            <div className={`relative p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:border-cyan-500/30 ${showServices ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <MdAddToHomeScreen className="absolute -right-4 -bottom-4 text-9xl text-slate-200 dark:text-cyan-500/5 pointer-events-none" />
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">Mobile & Front-End Interfaces</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed min-h-[4rem] relative z-10">
+                <Typewriter text="I can create reactive User Interfaces, modern web applications, and cross-platform mobile solutions. Focus on User Experience, performance, and accessibility." start={showServices} speed={8} />
+              </p>
             </div>
           </div>
         </div>

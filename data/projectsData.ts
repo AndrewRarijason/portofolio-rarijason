@@ -224,35 +224,71 @@ export const projectsData: ProjectData[] = [
   },
 
   /* 5 */
-  // {
-  //   slug: "parcflow",
-  //   title: "Parcflow - Vehicle fleet management system",
-  //   description: "Smart management of vehicles and their maintenance.",
-  //   description_gm: "A solution for managing your vehicle fleet, featuring maintenance tracking, automated alerts, and mileage management.",
-  //   stack: "Node.js, Express.js, Prisma, Next typescript, tailwind CSS, .",
-  //   imagebg: { src: "/parcflow/website.png", alt: "Parcflow Website Background" },
-  //   images: [
-  //     {
-  //       src: "/parcflow/website-mobile.png",
-  //       alt: "Mobile version",
-  //       caption: "Mobile version",
-  //       explanation: "This is the mobile version of the site where you can find the homepage."
-  //     },
-  //     {
-  //       src: "/parcflow/website-bilingue.png",
-  //       alt: "Bilingual website",
-  //       caption: "Bilingual website",
-  //       explanation: "The website is bilingual (French and English)"
-  //     },
-  //     {
-  //       src: "/parcflow/website-hosting.png",
-  //       alt: "Website hosting",
-  //       caption: "Website hosting",
-  //       explanation: "Website hosting on a server. Installation of the SSL certificate, configuration of database, creation and configuration of the website email addresses."
-  //     }
-  //   ],
-  //   overlayOpacity: "bg-black/60"
-  // },
+  {
+    slug: "parcflow",
+    title: "Parcflow - Vehicle fleet management system",
+    description: "Smart monitoring and management of vehicles and their maintenance.",
+    description_gm: "A solution for managing your vehicle fleet, featuring maintenance tracking, automated alerts, and mileage management. Below, I'll outline some key features.",
+    stack: "Node.js, Express.js, Prisma, Next typescript, tailwind CSS, .",
+    imagebg: { src: "/parcflow/parcflow.jpg", alt: "Parcflow Website Background" },
+    images: [
+      {
+        src: "/parcflow/kpi-global.png",
+        alt: "Parcflow - KPI global",
+        caption: "KPI Global",
+        explanation: "There's the vehicle fleet and the maintenance dashboard."
+      },
+      {
+        src: "/parcflow/courbe-duree-intervention.png",
+        alt: "Parcflow - Duration maintenance tasks",
+        caption: "Duration maintenance tasks",
+        explanation: "Duration curve for the longest maintenance tasks so we can determine which step takes the longest."
+      },
+      {
+        src: "/parcflow/suivi-demandes.png",
+        alt: "Parcflow - Tracking vehicle in maintenance",
+        caption: "Vehicle tracking during maintenance",
+        explanation: "Monitoring your vehicle during maintenance work to track progress step by step."
+      },
+      {
+        src: "/parcflow/my-vehicle.png",
+        alt: "Parcflow - My Vehicle",
+        caption: "My Vehicle",
+        explanation: "View your vehicle's information and maintenance history. There could also be an alert that pops up for preventive maintenance, indicating the approximate mileage remaining before a part that has been replaced will be completely worn out."
+      },
+      {
+        src: "/parcflow/controle-vehicule.png",
+        alt: "Parcflow - Vehicle inspection",
+        caption: "Vehicle inspection",
+        explanation: "Inspection form used to thoroughly check vehicle components that require attention. At the end of the process, a PDF file will be generated."
+      },
+      {
+        src: "/parcflow/fiche-controle.png",
+        alt: "Parcflow - Vehicle checklist",
+        caption: "Vehicle checklist",
+        explanation: "Checklist for Vehicle Inspection and Fuel Level. At the end of the process, a PDF file will be generated."
+      },
+      {
+        src: "/parcflow/historique-ravitaillement.png",
+        alt: "Parcflow - Fuel history",
+        caption: "Fuel history",
+        explanation: "History of fuel refills for one vehicle. For security reasons, all changes made by a user of the app are tracked."
+      },
+      {
+        src: "/parcflow/tdb-ravitaillement.png",
+        alt: "Parcflow - Dashboard refueling",
+        caption: "Dashboard refueling",
+        explanation: "A dashboard dedicated to fuel purchases that helps identify the largest expenses. A currency converter from the ariary to the euro has been added."
+      },
+      {
+        src: "/parcflow/mail-kilometrage.png",
+        alt: "Parcflow - Email alert",
+        caption: "Email alert",
+        explanation: "The app sends an email to the relevant user and manager at each stage of the process, for documents due, and other alerts."
+      }
+    ],
+    overlayOpacity: "bg-black/60"
+  },
 
   /* 6 */
   {
@@ -284,4 +320,5 @@ export const projectsData: ProjectData[] = [
     ],
     overlayOpacity: "bg-black/60"
   }
+  
 ];
