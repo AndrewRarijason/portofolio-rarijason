@@ -30,12 +30,12 @@ export default function ProjectDetails({
   return (
     <section className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-12 text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-[#0F172A] min-h-screen transition-colors duration-300">
       
-      {/* Glow Orbs répartis du haut vers le bas */}
+      {/* Glow Orbs */}
       <div className="absolute top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute top-[800px] right-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute top-[1600px] left-10 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- ENSEMBLE DE VECTEURS ANIMÉS MULTI-NIVEAUX (LIGNES DROITES UNIQUEMENT) --- */}
+      {/* --- ENSEMBLE DE VECTEURS ANIMÉS (Version optimisée sans filtres flous) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -47,13 +47,9 @@ export default function ProjectDetails({
               <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#818cf8" stopOpacity="0.5" />
             </linearGradient>
-            <filter id="glowProject" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
           </defs>
 
-          {/* GROUPE 1 (Haut) : Tracé convergent original Contact */}
+          {/* GROUPE 1 (Haut) */}
           <g>
             <path
               d="M -50 800 L 400 500 L 500 200 L 900 150 L 1400 400 L 1600 100"
@@ -61,7 +57,6 @@ export default function ProjectDetails({
               stroke="url(#projectGrad1)"
               strokeWidth="2.5"
               strokeDasharray="150 100"
-              filter="url(#glowProject)"
               className="animate-vector-flow"
             />
             <path
@@ -72,12 +67,12 @@ export default function ProjectDetails({
               strokeDasharray="120 120"
               className="animate-vector-flow-reverse opacity-60"
             />
-            <circle cx="400" cy="500" r="5" fill="#06b6d4" filter="url(#glowProject)" />
+            <circle cx="400" cy="500" r="5" fill="#06b6d4" />
             <circle cx="700" cy="350" r="6" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
-            <circle cx="1200" cy="650" r="5" fill="#3b82f6" filter="url(#glowProject)" />
+            <circle cx="1200" cy="650" r="5" fill="#3b82f6" />
           </g>
 
-          {/* GROUPE 2 (Milieu ~600px) : Nouveau tracé angulaire & rapide */}
+          {/* GROUPE 2 (Milieu ~600px) */}
           <g className="translate-y-[600px]">
             <path
               d="M -100 200 L 300 50 L 600 450 L 1000 200 L 1300 0 L 1500 300 L 1800 150"
@@ -85,7 +80,6 @@ export default function ProjectDetails({
               stroke="url(#projectGrad2)"
               strokeWidth="2"
               strokeDasharray="200 100"
-              filter="url(#glowProject)"
               className="animate-vector-fast"
             />
             <path
@@ -97,10 +91,10 @@ export default function ProjectDetails({
               className="animate-vector-slow opacity-70"
             />
             <circle cx="600" cy="450" r="4" fill="#38bdf8" className="animate-ping origin-center" />
-            <circle cx="1300" cy="500" r="5" fill="#06b6d4" filter="url(#glowProject)" />
+            <circle cx="1300" cy="500" r="5" fill="#06b6d4" />
           </g>
 
-          {/* GROUPE 3 (Bas ~1300px) : Nouveau tracé géométrique brisé & effet pulse */}
+          {/* GROUPE 3 (Bas ~1300px) */}
           <g className="translate-y-[1300px]">
             <path
               d="M 1700 700 L 1200 400 L 900 600 L 400 250 L -100 500"
@@ -108,7 +102,6 @@ export default function ProjectDetails({
               stroke="url(#projectGrad1)"
               strokeWidth="2.5"
               strokeDasharray="180 120"
-              filter="url(#glowProject)"
               className="animate-vector-flow-reverse"
             />
             <path
@@ -120,10 +113,10 @@ export default function ProjectDetails({
               className="animate-vector-fast opacity-50"
             />
             <circle cx="900" cy="600" r="6" fill="#818cf8" className="animate-ping origin-center opacity-75" />
-            <circle cx="400" cy="250" r="4" fill="#06b6d4" filter="url(#glowProject)" />
+            <circle cx="400" cy="250" r="4" fill="#06b6d4" />
           </g>
 
-          {/* GROUPE 4 (Très bas ~2000px si grille très longue) */}
+          {/* GROUPE 4 (~2000px) */}
           <g className="translate-y-[2000px]">
             <path
               d="M -50 300 L 500 100 L 900 500 L 1700 200"

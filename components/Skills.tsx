@@ -37,7 +37,7 @@ export default function Skills() {
       prog = Math.max(0, Math.min(1, prog));
       setProgress(prog);
     }
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
     handleScroll();
     return () => {
@@ -96,7 +96,7 @@ export default function Skills() {
       {/* Background Orbs */}
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN --- */}
+      {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN (Style Hero.tsx sans filter glow) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -105,11 +105,6 @@ export default function Skills() {
               <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#a855f7" stopOpacity="0.8" />
             </linearGradient>
-
-            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
           </defs>
 
           {/* Réseau de Lignes Vectorielles Animées */}
@@ -118,7 +113,6 @@ export default function Skills() {
             fill="none"
             stroke="url(#vectorGrad)"
             strokeWidth="3"
-            filter="url(#glow)"
             strokeDasharray="180 120"
             className="animate-vector-flow"
           />
@@ -131,16 +125,16 @@ export default function Skills() {
             className="animate-vector-flow-reverse opacity-60"
           />
 
-          {/* Sommets / Nœuds du vecteur avec effet de pulsation */}
+          {/* Sommets / Nœuds du vecteur */}
           <circle cx="300" cy="150" r="5" fill="#06b6d4" className="animate-ping origin-center text-cyan-400 opacity-75" />
-          <circle cx="300" cy="150" r="4" fill="#06b6d4" filter="url(#glow)" />
+          <circle cx="300" cy="150" r="4" fill="#06b6d4" />
 
-          <circle cx="500" cy="450" r="6" fill="#3b82f6" filter="url(#glow)" />
+          <circle cx="500" cy="450" r="6" fill="#3b82f6" />
 
           <circle cx="900" cy="800" r="5" fill="#a855f7" className="animate-ping origin-center text-purple-500 opacity-75" />
-          <circle cx="900" cy="800" r="4" fill="#a855f7" filter="url(#glow)" />
+          <circle cx="900" cy="800" r="4" fill="#a855f7" />
 
-          <circle cx="1200" cy="300" r="6" fill="#06b6d4" filter="url(#glow)" />
+          <circle cx="1200" cy="300" r="6" fill="#06b6d4" />
         </svg>
       </div>
 

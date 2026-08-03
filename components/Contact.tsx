@@ -68,7 +68,7 @@ export default function Contact() {
       {/* Glow Orb */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- VECTEUR CONTACT : Réseau Convergent & Ondes --- */}
+      {/* --- VECTEUR CONTACT (Version optimisée sans filtres SVG flous) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -76,10 +76,6 @@ export default function Contact() {
               <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.8" />
             </linearGradient>
-            <filter id="glowContact" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
           </defs>
 
           {/* Lignes convergeant vers le formulaire */}
@@ -89,7 +85,6 @@ export default function Contact() {
             stroke="url(#contactGrad)"
             strokeWidth="2.5"
             strokeDasharray="150 100"
-            filter="url(#glowContact)"
             className="animate-vector-flow"
           />
           <path
@@ -102,10 +97,10 @@ export default function Contact() {
           />
 
           {/* Pulse Nodes */}
-          <circle cx="400" cy="500" r="5" fill="#06b6d4" filter="url(#glowContact)" />
+          <circle cx="400" cy="500" r="5" fill="#06b6d4" />
           <circle cx="700" cy="350" r="6" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
           <circle cx="700" cy="350" r="4" fill="#06b6d4" />
-          <circle cx="1200" cy="650" r="5" fill="#3b82f6" filter="url(#glowContact)" />
+          <circle cx="1200" cy="650" r="5" fill="#3b82f6" />
         </svg>
       </div>
 
