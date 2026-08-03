@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ThemeToggle from "@/components/ThemeToggle"; // Assurez-vous du bon chemin d'import
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // IntersectionObserver pour la section active
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const observer = new window.IntersectionObserver(
@@ -24,9 +25,21 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Écouteur de scroll optimisé (évite les re-renders excessifs)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -63,7 +76,7 @@ export default function Header() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-8 lg:px-16 py-4 ${
         scrolled
-          ? "bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-lg shadow-cyan-500/5 py-3"
+          ? "bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm py-3"
           : "bg-transparent py-6"
       }`}
     >
@@ -137,7 +150,7 @@ export default function Header() {
 
       {/* Menu Mobile Fullscreen */}
       {menuOpen && (
-        <nav className="lg:hidden fixed inset-0 bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-2xl z-[9999] flex flex-col justify-center items-center">
+        <nav className="lg:hidden fixed inset-0 bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md z-[9999] flex flex-col justify-center items-center">
           <button
             className="absolute top-6 right-6 p-2 text-cyan-500 dark:text-cyan-400 hover:text-slate-900 dark:hover:text-white transition-colors"
             onClick={closeMenu}

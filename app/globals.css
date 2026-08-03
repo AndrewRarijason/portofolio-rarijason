@@ -35,56 +35,91 @@ body {
   background: #06b6d4;
 }
 
-/* Animations d'origine conservées */
+/* --- ANIMATIONS OPTIMISÉES GPU --- */
+
 @keyframes bounce-custom {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(16px); }
+  50% { transform: translateY(12px); }
 }
 .animate-bounce-custom {
   animation: bounce-custom 2s infinite ease-in-out;
+  will-change: transform;
 }
 
 @keyframes orbit1 {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  25%  { transform: translate(30px, 60px) rotate(90deg); }
-  50%  { transform: translate(0px, 120px) rotate(180deg); }
-  75%  { transform: translate(-30px, 60px) rotate(270deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(30px, 60px, 0) rotate(90deg); }
+  50%  { transform: translate3d(0px, 120px, 0) rotate(180deg); }
+  75%  { transform: translate3d(-30px, 60px, 0) rotate(270deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(360deg); }
 }
 
 @keyframes orbit2 {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  25%  { transform: translate(40px, 40px) rotate(90deg); }
-  50%  { transform: translate(0px, 80px) rotate(180deg); }
-  75%  { transform: translate(-40px, 40px) rotate(270deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(40px, 40px, 0) rotate(90deg); }
+  50%  { transform: translate3d(0px, 80px, 0) rotate(180deg); }
+  75%  { transform: translate3d(-40px, 40px, 0) rotate(270deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(360deg); }
 }
 
 @keyframes orbit3 {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  25%  { transform: translate(20px, 30px) rotate(90deg); }
-  50%  { transform: translate(0px, 60px) rotate(180deg); }
-  75%  { transform: translate(-20px, 30px) rotate(270deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(20px, 30px, 0) rotate(90deg); }
+  50%  { transform: translate3d(0px, 60px, 0) rotate(180deg); }
+  75%  { transform: translate3d(-20px, 30px, 0) rotate(270deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(360deg); }
 }
 
-.animate-orbit1 { animation: orbit1 8s linear infinite; }
-.animate-orbit2 { animation: orbit2 10s linear infinite; }
-.animate-orbit3 { animation: orbit3 12s linear infinite; }
+.animate-orbit1 { animation: orbit1 10s linear infinite; will-change: transform; }
+.animate-orbit2 { animation: orbit2 12s linear infinite; will-change: transform; }
+.animate-orbit3 { animation: orbit3 15s linear infinite; will-change: transform; }
 
 @keyframes vector-flow {
-  0% {
-    stroke-dashoffset: 1000;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes vector-flow-fast {
+  0% { stroke-dashoffset: 800; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes vector-flow-slow {
+  0% { stroke-dashoffset: 1500; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes vector-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.98); }
+  50% { opacity: 0.6; transform: scale(1.02); }
+}
+
+.animate-vector-fast {
+  animation: vector-flow-fast 12s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-vector-slow {
+  animation: vector-flow-slow 30s linear infinite reverse;
+  will-change: stroke-dashoffset;
+}
+
+.animate-vector-pulse {
+  animation: vector-pulse 6s ease-in-out infinite;
 }
 
 .animate-vector-flow {
-  animation: vector-flow 15s linear infinite;
+  animation: vector-flow 18s linear infinite;
+  will-change: stroke-dashoffset;
 }
 
 .animate-vector-flow-reverse {
-  animation: vector-flow 22s linear infinite reverse;
+  animation: vector-flow 25s linear infinite reverse;
+  will-change: stroke-dashoffset;
+}
+
+@media (max-width: 768px) {
+  .animate-orbit1, .animate-orbit2, .animate-orbit3 {
+    animation: none !important;
+  }
 }
