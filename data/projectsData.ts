@@ -229,7 +229,7 @@ export const projectsData: ProjectData[] = [
     title: "Parcflow - Vehicle fleet management system",
     description: "Smart monitoring and management of vehicles and their maintenance.",
     description_gm: "A solution for managing your vehicle fleet, featuring maintenance tracking, automated alerts, and mileage management. Below, I'll outline some key features.",
-    stack: "Node.js, Express.js, Prisma, Next typescript, tailwind CSS, .",
+    stack: "Node.js, Express.js, Prisma, Next TypeScript, Tailwind CSS, PostgreSQL",
     imagebg: { src: "/parcflow/parcflow.jpg", alt: "Parcflow Website Background" },
     images: [
       {
