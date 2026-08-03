@@ -25,7 +25,7 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Écouteur de scroll optimisé (évite les re-renders excessifs)
+  // Écouteur de scroll optimisé
   useEffect(() => {
     let ticking = false;
 
@@ -43,24 +43,21 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.dispatchEvent(new CustomEvent("menu-toggled", { detail: menuOpen }));
-  }, [menuOpen]);
-
+  // Bloquer le scroll sans réinitialiser la position de la page
   useEffect(() => {
     if (typeof document === "undefined") return;
-    const originalOverflow = document.body.style.overflow;
+
     if (menuOpen) {
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
-      document.body.classList.add("menu-open");
     } else {
-      document.body.style.overflow = originalOverflow || "";
-      document.body.classList.remove("menu-open");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     }
+
     return () => {
-      document.body.style.overflow = originalOverflow || "";
-      document.body.classList.remove("menu-open");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
@@ -74,10 +71,10 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-8 lg:px-16 py-4 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-8 lg:px-16 ${
         scrolled
           ? "bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm py-3"
-          : "bg-transparent py-6"
+          : "bg-transparent py-5 sm:py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -115,23 +112,26 @@ export default function Header() {
             Contact
           </a>
 
-          {/* Theme Switcher Button */}
           <div className="ml-3">
             <ThemeToggle />
           </div>
         </nav>
 
         {/* Bouton Burger Mobile */}
-        <div className="lg:hidden flex items-center gap-3">
+        <div
+          className={`lg:hidden flex items-center transition-all duration-300 z-[10000] relative ${
+            menuOpen ? "gap-5 pr-2" : "gap-3 pr-0"
+          }`}
+        >
           <ThemeToggle />
           <button
-            className="flex flex-col justify-center items-center w-10 h-10 relative text-slate-900 dark:text-white focus:outline-none"
+            className="flex flex-col justify-center items-center w-10 h-10 text-slate-900 dark:text-white focus:outline-none p-1"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle navigation"
           >
             <span
               className={`h-[2px] w-6 bg-cyan-500 dark:bg-cyan-400 transition-all duration-300 rounded-full ${
-                menuOpen ? "translate-y-[6px] rotate-45" : "-translate-y-[5px]"
+                menuOpen ? "translate-y-[2px] rotate-45" : "-translate-y-[5px]"
               }`}
             />
             <span
@@ -141,7 +141,7 @@ export default function Header() {
             />
             <span
               className={`h-[2px] w-6 bg-cyan-500 dark:bg-cyan-400 transition-all duration-300 rounded-full ${
-                menuOpen ? "-translate-y-[6px] -rotate-45" : "translate-y-[5px]"
+                menuOpen ? "-translate-y-[2px] -rotate-45" : "translate-y-[5px]"
               }`}
             />
           </button>
@@ -150,15 +150,7 @@ export default function Header() {
 
       {/* Menu Mobile Fullscreen */}
       {menuOpen && (
-        <nav className="lg:hidden fixed inset-0 bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-md z-[9999] flex flex-col justify-center items-center">
-          <button
-            className="absolute top-6 right-6 p-2 text-cyan-500 dark:text-cyan-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-            onClick={closeMenu}
-            aria-label="Close navigation"
-          >
-            <span className="text-3xl font-light">✕</span>
-          </button>
-
+        <nav className="lg:hidden fixed inset-0 h-dvh w-screen bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-xl z-[9999] flex flex-col justify-center items-center">
           <ul className="flex flex-col items-center space-y-8">
             {navItems.map((item) => (
               <li key={item.id}>
