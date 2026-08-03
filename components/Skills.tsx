@@ -5,8 +5,10 @@ import { FaWordpress } from "react-icons/fa";
 import { GrMysql } from "react-icons/gr";
 import { useEffect, useRef, useState } from "react";
 import { SiPrisma } from "react-icons/si";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Skills() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const iconsRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -96,7 +98,7 @@ export default function Skills() {
       {/* Background Orbs */}
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN (Style Hero.tsx sans filter glow) --- */}
+      {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -107,7 +109,6 @@ export default function Skills() {
             </linearGradient>
           </defs>
 
-          {/* Réseau de Lignes Vectorielles Animées */}
           <path
             d="M -100 150 L 300 150 L 500 450 L 200 800 L 900 800 L 1200 300 L 1600 600"
             fill="none"
@@ -125,7 +126,6 @@ export default function Skills() {
             className="animate-vector-flow-reverse opacity-60"
           />
 
-          {/* Sommets / Nœuds du vecteur */}
           <circle cx="300" cy="150" r="5" fill="#06b6d4" className="animate-ping origin-center text-cyan-400 opacity-75" />
           <circle cx="300" cy="150" r="4" fill="#06b6d4" />
 
@@ -139,9 +139,10 @@ export default function Skills() {
       </div>
 
       <div className="text-center mb-16 relative z-10">
-        <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">Technical Proficiency</span>
+        <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">{t.skills.subtitle}</span>
         <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Tools</span>
+          {t.skills.titleSkills}{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{t.skills.titleTools}</span>
         </h2>
         <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
       </div>
@@ -158,7 +159,7 @@ export default function Skills() {
       <div className="max-w-5xl mx-auto space-y-16 relative z-10" ref={iconsRef}>
         {/* USING NOW */}
         <div>
-          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-cyan-500 pl-3">Using now</h3>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-cyan-500 pl-3">{t.skills.usingNow}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 sm:gap-6">
             {usingNowTechs.map((tech, idx) => (
               <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-cyan-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
@@ -175,7 +176,7 @@ export default function Skills() {
 
         {/* OTHERS */}
         <div>
-          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-blue-500 pl-3">Tools & Environment</h3>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-blue-500 pl-3">{t.skills.toolsEnv}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6">
             {otherTechs.map((tech, idx) => (
               <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
@@ -192,7 +193,7 @@ export default function Skills() {
 
         {/* LEARNING */}
         <div>
-          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-purple-500 pl-3">Continuously Learning</h3>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-purple-500 pl-3">{t.skills.learning}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4 sm:gap-6">
             {learningTechs.map((tech, idx) => (
               <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-purple-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">

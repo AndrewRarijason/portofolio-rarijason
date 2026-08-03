@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
+import LanguageToggle from "@/components/LanguageToggle"; // <--- Import
+import { useLanguage } from "@/context/LanguageContext"; // <--- Import
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage(); // <--- Hook de traduction
 
-  // IntersectionObserver pour la section active
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const observer = new window.IntersectionObserver(
@@ -25,10 +27,8 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Écouteur de scroll optimisé
   useEffect(() => {
     let ticking = false;
-
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -38,15 +38,12 @@ export default function Header() {
         ticking = true;
       }
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Bloquer le scroll sans réinitialiser la position de la page
   useEffect(() => {
     if (typeof document === "undefined") return;
-
     if (menuOpen) {
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
@@ -54,7 +51,6 @@ export default function Header() {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     }
-
     return () => {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
@@ -63,10 +59,11 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  // Labels dynamiques selon la langue
   const navItems = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
+    { id: "about", label: t.nav.about },
+    { id: "skills", label: t.nav.skills },
+    { id: "projects", label: t.nav.projects },
   ];
 
   return (
@@ -78,7 +75,6 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Brand / Logo */}
         <a href="#home" className="text-xl font-extrabold tracking-wider text-slate-900 dark:text-white group">
           ANDREW<span className="text-cyan-500 dark:text-cyan-400 group-hover:animate-pulse"> RARIJASON</span>
         </a>
@@ -109,20 +105,22 @@ export default function Header() {
             href="#contact"
             className="ml-4 px-6 py-2.5 text-sm font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 transition-all duration-300"
           >
-            Contact
+            {t.nav.contact}
           </a>
 
-          <div className="ml-3">
+          <div className="ml-3 flex items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
           </div>
         </nav>
 
-        {/* Bouton Burger Mobile */}
+        {/* Actions Mobile */}
         <div
           className={`lg:hidden flex items-center transition-all duration-300 z-[10000] relative ${
-            menuOpen ? "gap-5 pr-2" : "gap-3 pr-0"
+            menuOpen ? "gap-3 pr-2" : "gap-2 pr-0"
           }`}
         >
+          <LanguageToggle />
           <ThemeToggle />
           <button
             className="flex flex-col justify-center items-center w-10 h-10 text-slate-900 dark:text-white focus:outline-none p-1"
@@ -169,7 +167,7 @@ export default function Header() {
                 onClick={closeMenu}
                 className="px-8 py-3 text-lg font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-lg shadow-cyan-500/20"
               >
-                Contact
+                {t.nav.contact}
               </a>
             </li>
           </ul>

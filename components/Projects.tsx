@@ -6,7 +6,27 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { projectsData } from "../data/projectsData";
 
-export default function Projects() {
+interface ProjectsProps {
+  dict?: {
+    badge?: string;
+    titleMain?: string;
+    titleHighlight?: string;
+    codeLabel?: string;
+    privateProjectLabel?: string;
+    detailsLabel?: string;
+  };
+}
+
+export default function Projects({
+  dict = {
+    badge: "Portfolio",
+    titleMain: "Project",
+    titleHighlight: "excerpt",
+    codeLabel: "Code",
+    privateProjectLabel: "Private project",
+    detailsLabel: "Details",
+  },
+}: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean[]>(Array(projectsData.length).fill(false));
 
@@ -68,10 +88,13 @@ export default function Projects() {
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">
-            Portfolio
+            {dict.badge}
           </span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">excerpt</span>
+            {dict.titleMain}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">
+              {dict.titleHighlight}
+            </span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
         </div>
@@ -118,17 +141,17 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
                     >
-                      <FaGithub size={16} /> Code
+                      <FaGithub size={16} /> {dict.codeLabel}
                     </a>
                   ) : (
-                    <span className="text-xs text-slate-400 dark:text-slate-500">Private project</span>
+                    <span className="text-xs text-slate-400 dark:text-slate-500">{dict.privateProjectLabel}</span>
                   )}
 
                   <Link
                     href={`/projects/${project.slug}`}
                     className="flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 transition-colors group/link"
                   >
-                    Details
+                    {dict.detailsLabel}
                     <FaExternalLinkAlt size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </Link>
                 </div>

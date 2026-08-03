@@ -5,8 +5,11 @@ import Image from "next/image";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { RiArrowDownDoubleFill } from "react-icons/ri";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   const [showHello, setShowHello] = useState(false);
   const [showName, setShowName] = useState(false);
   const [showBottom, setShowBottom] = useState(false);
@@ -26,12 +29,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex flex-col min-h-screen bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 overflow-hidden pt-20 transition-colors duration-300" id="home">
+    <section
+      className="relative flex flex-col min-h-screen bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 overflow-hidden pt-20 transition-colors duration-300"
+      id="home"
+    >
       {/* Glow Orbs légers en arrière-plan */}
       <div className="absolute top-20 left-10 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-cyan-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute top-1/2 right-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-      {/* --- VECTEUR HERO (SVG sans filtres de flou lourds) --- */}
+      {/* --- VECTEUR HERO (SVG) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -59,10 +65,22 @@ export default function Hero() {
           />
 
           <circle cx="250" cy="200" r="4" fill="#06b6d4" />
-          <circle cx="400" cy="350" r="5" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
+          <circle
+            cx="400"
+            cy="350"
+            r="5"
+            fill="#3b82f6"
+            className="animate-ping origin-center text-cyan-400 opacity-75"
+          />
           <circle cx="400" cy="350" r="4" fill="#06b6d4" />
           <circle cx="800" cy="350" r="4" fill="#3b82f6" />
-          <circle cx="950" cy="200" r="5" fill="#06b6d4" className="animate-ping origin-center text-blue-500 opacity-75" />
+          <circle
+            cx="950"
+            cy="200"
+            r="5"
+            fill="#06b6d4"
+            className="animate-ping origin-center text-blue-500 opacity-75"
+          />
         </svg>
       </div>
 
@@ -75,7 +93,7 @@ export default function Hero() {
                 showHello ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
               }`}
             >
-              Hello, I am
+              {t.hero.greeting}
             </span>
 
             <h1
@@ -94,7 +112,7 @@ export default function Hero() {
                 showBottom ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
-              Full Stack Developer
+              {t.hero.role}
             </p>
 
             <div
@@ -159,7 +177,7 @@ export default function Hero() {
                 showFooter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
               }`}
             >
-              I am Andrew, a developer who believes that well-designed technology drives meaningful progress. Each project is an opportunity to innovate by creating lasting bridges between needs and solutions. My approach focuses on understanding the &quot;why&quot; before the &quot;how&quot;, collaborating with business teams, and always prioritizing the final user experience.
+              {t.hero.footerDesc}
             </p>
           </div>
 
@@ -171,7 +189,7 @@ export default function Hero() {
               }`}
             >
               <button className="px-6 py-3 border border-cyan-500/50 dark:border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500 rounded-xl transition-all duration-300 font-semibold text-sm cursor-pointer shadow-lg shadow-cyan-500/5">
-                Know more about me
+                {t.hero.knowMore}
               </button>
             </a>
 

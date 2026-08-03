@@ -15,6 +15,12 @@ interface ProjectDetailProps {
   images: { src: string; alt: string; caption?: string; explanation?: string }[];
   github?: string;
   backUrl?: string;
+  dict?: {
+    back?: string;
+    stackLabel?: string;
+    viewGithub?: string;
+    closeLabel?: string;
+  };
 }
 
 export default function ProjectDetails({
@@ -24,6 +30,12 @@ export default function ProjectDetails({
   images,
   github,
   backUrl = "/#projects",
+  dict = {
+    back: "Back",
+    stackLabel: "Stack :",
+    viewGithub: "View on GitHub",
+    closeLabel: "Fermer",
+  },
 }: ProjectDetailProps) {
   const [zoomedImg, setZoomedImg] = useState<null | { src: string; alt: string }>(null);
 
@@ -35,7 +47,7 @@ export default function ProjectDetails({
       <div className="absolute top-[800px] right-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute top-[1600px] left-10 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- ENSEMBLE DE VECTEURS ANIMÉS (Version optimisée sans filtres flous) --- */}
+      {/* --- ENSEMBLE DE VECTEURS ANIMÉS --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -49,7 +61,7 @@ export default function ProjectDetails({
             </linearGradient>
           </defs>
 
-          {/* GROUPE 1 (Haut) */}
+          {/* GROUPE 1 */}
           <g>
             <path
               d="M -50 800 L 400 500 L 500 200 L 900 150 L 1400 400 L 1600 100"
@@ -72,7 +84,7 @@ export default function ProjectDetails({
             <circle cx="1200" cy="650" r="5" fill="#3b82f6" />
           </g>
 
-          {/* GROUPE 2 (Milieu ~600px) */}
+          {/* GROUPE 2 */}
           <g className="translate-y-[600px]">
             <path
               d="M -100 200 L 300 50 L 600 450 L 1000 200 L 1300 0 L 1500 300 L 1800 150"
@@ -94,7 +106,7 @@ export default function ProjectDetails({
             <circle cx="1300" cy="500" r="5" fill="#06b6d4" />
           </g>
 
-          {/* GROUPE 3 (Bas ~1300px) */}
+          {/* GROUPE 3 */}
           <g className="translate-y-[1300px]">
             <path
               d="M 1700 700 L 1200 400 L 900 600 L 400 250 L -100 500"
@@ -116,7 +128,7 @@ export default function ProjectDetails({
             <circle cx="400" cy="250" r="4" fill="#06b6d4" />
           </g>
 
-          {/* GROUPE 4 (~2000px) */}
+          {/* GROUPE 4 */}
           <g className="translate-y-[2000px]">
             <path
               d="M -50 300 L 500 100 L 900 500 L 1700 200"
@@ -138,7 +150,7 @@ export default function ProjectDetails({
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-300 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 shadow-xl transition-all duration-300 group"
         >
           <IoIosArrowBack className="transition-transform group-hover:-translate-x-1" />
-          <span className="text-sm font-medium">Back</span>
+          <span className="text-sm font-medium">{dict.back}</span>
         </Link>
       </div>
 
@@ -152,7 +164,7 @@ export default function ProjectDetails({
             <button
               className="absolute -top-12 right-0 text-slate-300 hover:text-white text-2xl transition-colors"
               onClick={() => setZoomedImg(null)}
-              aria-label="Fermer"
+              aria-label={dict.closeLabel}
             >
               <FaTimes />
             </button>
@@ -183,7 +195,9 @@ export default function ProjectDetails({
         {/* Tag Stack Technique */}
         {stack && (
           <div className="flex flex-wrap items-center gap-2 mb-12 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span className="text-xs uppercase font-bold tracking-wider text-cyan-600 dark:text-cyan-400 mr-2">Stack :</span>
+            <span className="text-xs uppercase font-bold tracking-wider text-cyan-600 dark:text-cyan-400 mr-2">
+              {dict.stackLabel}
+            </span>
             {stack.replace("Stack:", "").split(",").map((tech, i) => (
               <span key={i} className="px-3 py-1 rounded-md text-xs font-medium bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
                 {tech.trim()}
@@ -233,7 +247,7 @@ export default function ProjectDetails({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white dark:text-slate-950 font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all duration-300 transform hover:-translate-y-1"
             >
-              <FaGithub size={20} /> View on GitHub
+              <FaGithub size={20} /> {dict.viewGithub}
             </a>
           </div>
         )}

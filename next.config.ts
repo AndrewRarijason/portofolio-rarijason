@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export', // ← CRITIQUE pour hébergement partagé
+  output: 'export',
   images: {
-    unoptimized: true, // ← Images non optimisées par Next.js
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+}
 
 export default nextConfig;
