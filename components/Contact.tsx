@@ -5,8 +5,10 @@ import { FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { IoIosArrowDropup, IoIosMail } from "react-icons/io";
 import { IoSendSharp } from "react-icons/io5";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [showArrow, setShowArrow] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState<null | "ok" | "error">(null);
@@ -68,7 +70,7 @@ export default function Contact() {
       {/* Glow Orb */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* --- VECTEUR CONTACT (Version optimisée sans filtres SVG flous) --- */}
+      {/* --- VECTEUR CONTACT --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -78,7 +80,6 @@ export default function Contact() {
             </linearGradient>
           </defs>
 
-          {/* Lignes convergeant vers le formulaire */}
           <path
             d="M -50 800 L 400 500 L 500 200 L 900 150 L 1400 400 L 1600 100"
             fill="none"
@@ -96,7 +97,6 @@ export default function Contact() {
             className="animate-vector-flow-reverse opacity-60"
           />
 
-          {/* Pulse Nodes */}
           <circle cx="400" cy="500" r="5" fill="#06b6d4" />
           <circle cx="700" cy="350" r="6" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
           <circle cx="700" cy="350" r="4" fill="#06b6d4" />
@@ -106,15 +106,16 @@ export default function Contact() {
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">Get in Touch</span>
+          <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">{t.contact.subtitle}</span>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">Me</span>
+            {t.contact.titleContact}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{t.contact.titleMe}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
         </div>
 
         <p className="text-slate-600 dark:text-slate-400 text-center max-w-xl mx-auto mb-12 text-sm sm:text-base">
-          Feel free to reach out using the form below or via my social profiles.
+          {t.contact.desc}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
@@ -124,7 +125,7 @@ export default function Contact() {
               <input
                 type="text"
                 name="first_name"
-                placeholder="First name"
+                placeholder={t.contact.form.firstName}
                 className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -133,7 +134,7 @@ export default function Contact() {
               <input
                 type="text"
                 name="last_name"
-                placeholder="Last name"
+                placeholder={t.contact.form.lastName}
                 className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -146,7 +147,7 @@ export default function Contact() {
             <input
               type="text"
               name="title"
-              placeholder="Subject"
+              placeholder={t.contact.form.subject}
               className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
@@ -154,14 +155,14 @@ export default function Contact() {
             <input
               type="email"
               name="email"
-              placeholder="Your Email"
+              placeholder={t.contact.form.email}
               className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
 
             <textarea
               name="message"
-              placeholder="Message"
+              placeholder={t.contact.form.message}
               className="w-full bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 h-32 resize-none text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"
               required
             />
@@ -171,11 +172,11 @@ export default function Contact() {
               disabled={sending}
               className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white dark:text-slate-950 font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 disabled:opacity-50 cursor-pointer"
             >
-              {sending ? "Sending..." : "Send Message"} <IoSendSharp />
+              {sending ? t.contact.form.sending : t.contact.form.send} <IoSendSharp />
             </button>
 
-            {sent === "ok" && <p className="text-cyan-600 dark:text-cyan-400 text-xs text-center mt-2">Message sent successfully!</p>}
-            {sent === "error" && <p className="text-red-500 dark:text-red-400 text-xs text-center mt-2">An error occurred. Please try again.</p>}
+            {sent === "ok" && <p className="text-cyan-600 dark:text-cyan-400 text-xs text-center mt-2">{t.contact.form.success}</p>}
+            {sent === "error" && <p className="text-red-500 dark:text-red-400 text-xs text-center mt-2">{t.contact.form.error}</p>}
           </form>
 
           {/* Socials & Resume Download */}
@@ -206,9 +207,9 @@ export default function Contact() {
               <a
                 href={cvLanguage === "en" ? "/cv/Resume_AndrewRarijason.pdf" : "/cv/CV_AndrewRarijason.pdf"}
                 download={cvLanguage === "en" ? "Resume_AndrewRarijason.pdf" : "CV_AndrewRarijason.pdf"}
-                className="w-full flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-cyan-500/50 transition-all duration-300 text-sm"
               >
-                <FaDownload className="text-cyan-600 dark:text-cyan-400" /> Download {cvLanguage === "en" ? "English" : "French"} Resume
+                <FaDownload className="text-cyan-600 dark:text-cyan-400" /> {t.contact.downloadCv} {cvLanguage === "en" ? t.contact.englishCv : t.contact.frenchCv}
               </a>
             </div>
           </div>
