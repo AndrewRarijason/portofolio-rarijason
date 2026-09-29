@@ -1,32 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { motion, type Variants } from "motion/react";
+import { FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
-import { RiArrowDownDoubleFill } from "react-icons/ri";
+import { RiArrowDownDoubleFill, RiArrowRightLine } from "react-icons/ri";
 import { useLanguage } from "@/context/LanguageContext";
+import { cvPath } from "@/lib/i18n";
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transitionEnd: { filter: "none" },
+  },
+};
+
+const socialLinkClass =
+  "p-3 bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 rounded-xl hover:border-cyan-500/50 hover:text-cyan-500 dark:hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 hover:-translate-y-1 shadow-sm";
 
 export default function Hero() {
-  const { t } = useLanguage();
-
-  const [showHello, setShowHello] = useState(false);
-  const [showName, setShowName] = useState(false);
-  const [showBottom, setShowBottom] = useState(false);
-  const [showFooter, setShowFooter] = useState(false);
-
-  useEffect(() => {
-    setShowHello(true);
-    const t1 = setTimeout(() => setShowName(true), 150);
-    const t2 = setTimeout(() => setShowBottom(true), 350);
-    const t3 = setTimeout(() => setShowFooter(true), 500);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
-  }, []);
+  const { t, language } = useLanguage();
+  const cvFile = cvPath[language];
 
   return (
     <section
@@ -65,102 +68,116 @@ export default function Hero() {
           />
 
           <circle cx="250" cy="200" r="4" fill="#06b6d4" />
-          <circle
-            cx="400"
-            cy="350"
-            r="5"
-            fill="#3b82f6"
-            className="animate-ping origin-center text-cyan-400 opacity-75"
-          />
+          <circle cx="400" cy="350" r="5" fill="#3b82f6" className="animate-ping origin-center text-cyan-400 opacity-75" />
           <circle cx="400" cy="350" r="4" fill="#06b6d4" />
           <circle cx="800" cy="350" r="4" fill="#3b82f6" />
-          <circle
-            cx="950"
-            cy="200"
-            r="5"
-            fill="#06b6d4"
-            className="animate-ping origin-center text-blue-500 opacity-75"
-          />
+          <circle cx="950" cy="200" r="5" fill="#06b6d4" className="animate-ping origin-center text-blue-500 opacity-75" />
         </svg>
       </div>
 
       <div className="flex flex-col lg:flex-row flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-14 items-center z-10">
         {/* Colonne gauche : Présentation */}
         <div className="w-full lg:w-[60%] flex flex-col justify-center py-12">
-          <div className="flex flex-col items-start space-y-4">
-            <span
-              className={`text-cyan-600 dark:text-cyan-400 font-semibold tracking-wide uppercase text-sm sm:text-base transition-all duration-500 ${
-                showHello ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
-              }`}
+          <motion.div className="flex flex-col items-start space-y-5" variants={container} initial="hidden" animate="show">
+            {/* Badge de disponibilité */}
+            <motion.a
+              variants={item}
+              href="#contact"
+              data-umami-event="hero-availability"
+              className="group inline-flex items-center gap-2.5 pl-2.5 pr-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-md hover:border-emerald-500/60 transition-colors"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+              </span>
+              {t.hero.availability}
+              <RiArrowRightLine className="transition-transform group-hover:translate-x-0.5" />
+            </motion.a>
+
+            <motion.span
+              variants={item}
+              className="text-cyan-600 dark:text-cyan-400 font-semibold tracking-wide uppercase text-sm sm:text-base"
             >
               {t.hero.greeting}
-            </span>
+            </motion.span>
 
-            <h1
-              className={`text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white transition-all duration-500 leading-tight ${
-                showName ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
-              }`}
+            <motion.h1
+              variants={item}
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight"
             >
               Aiky Andrew <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 dark:from-cyan-400 dark:via-teal-300 dark:to-blue-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 dark:from-cyan-400 dark:via-teal-300 dark:to-blue-500 bg-[length:200%_auto] animate-gradient-x">
                 RARIJASON
               </span>
-            </h1>
+            </motion.h1>
 
-            <p
-              className={`text-lg sm:text-xl text-slate-600 dark:text-slate-400 font-medium transition-all duration-500 ${
-                showBottom ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              }`}
-            >
+            <motion.p variants={item} className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 font-medium">
               {t.hero.role}
-            </p>
+            </motion.p>
 
-            <div
-              className={`pt-4 flex flex-row gap-4 transition-all duration-500 ${
-                showBottom ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              }`}
-            >
+            {/* Appels à l'action */}
+            <motion.div variants={item} className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
-                href="https://github.com/AndrewRarijason"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 rounded-xl hover:border-cyan-500/50 hover:text-cyan-500 dark:hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                aria-label="GitHub"
+                href="#projects"
+                data-umami-event="hero-view-projects"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
               >
-                <FaGithub className="text-xl" />
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                <span className="relative">{t.hero.viewProjects}</span>
+                <RiArrowRightLine className="relative transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="https://www.linkedin.com/in/andrew-rarijason"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 rounded-xl hover:border-cyan-500/50 hover:text-cyan-500 dark:hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                aria-label="LinkedIn"
+                href={cvFile}
+                download={cvFile.split("/").pop()}
+                data-umami-event="cv-download"
+                data-umami-event-lang={language}
+                data-umami-event-location="hero"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm border border-cyan-500/50 dark:border-cyan-500/40 text-cyan-700 dark:text-cyan-300 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md hover:bg-cyan-500/10 hover:border-cyan-500 hover:-translate-y-0.5 transition-all duration-300"
               >
-                <FaLinkedinIn className="text-xl" />
+                <FaDownload className="transition-transform group-hover:translate-y-0.5" />
+                {t.hero.downloadCv}
               </a>
-              <a
-                href="mailto:rarijasonaiky@gmail.com"
-                className="p-3.5 bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 rounded-xl hover:border-cyan-500/50 hover:text-cyan-500 dark:hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                aria-label="Email"
-              >
-                <IoIosMail className="text-xl" />
+            </motion.div>
+
+            <motion.div variants={item} className="pt-2 flex flex-row gap-3">
+              <a href="https://github.com/AndrewRarijason" target="_blank" rel="noopener noreferrer" className={socialLinkClass} aria-label="GitHub" data-umami-event="social-github">
+                <FaGithub className="text-lg" />
               </a>
-            </div>
-          </div>
+              <a href="https://www.linkedin.com/in/andrew-rarijason" target="_blank" rel="noopener noreferrer" className={socialLinkClass} aria-label="LinkedIn" data-umami-event="social-linkedin">
+                <FaLinkedinIn className="text-lg" />
+              </a>
+              <a href="mailto:rarijasonaiky@gmail.com" className={socialLinkClass} aria-label="Email" data-umami-event="social-email">
+                <IoIosMail className="text-lg" />
+              </a>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Colonne droite : Photo + Bulles animées */}
         <div className="w-full lg:w-[40%] flex items-center justify-center relative py-12">
-          <div className="relative z-10 p-2 rounded-full bg-gradient-to-b from-cyan-500/20 to-blue-500/10 dark:from-cyan-500/30 dark:to-blue-500/10 backdrop-blur-md border border-cyan-500/30 dark:border-cyan-500/20 shadow-xl shadow-cyan-500/10">
-            <Image
-              src="/andrew.png"
-              alt="Andrew Rarijason"
-              width={310}
-              height={310}
-              className="rounded-full object-cover w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[310px] lg:h-[310px]"
-              priority
-            />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10"
+          >
+            {/* Anneau dégradé en rotation */}
+            <div className="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,#06b6d4,#3b82f6,#2dd4bf,transparent_70%,#06b6d4)] animate-spin-slow opacity-80 blur-[1px]" />
+            <div className="relative p-2 rounded-full bg-slate-50 dark:bg-[#0F172A]">
+              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
+                <Image
+                  src="/andrew.webp"
+                  alt="Andrew Rarijason"
+                  width={310}
+                  height={310}
+                  sizes="(min-width: 1024px) 310px, (min-width: 640px) 280px, 220px"
+                  quality={90}
+                  className="rounded-full object-cover w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[310px] lg:h-[310px]"
+                  priority
+                />
+              </motion.div>
+            </div>
+          </motion.div>
 
           <div className="absolute top-6 right-6 w-24 sm:w-32 h-24 sm:h-32 bg-cyan-500/20 rounded-full blur-sm animate-orbit1 pointer-events-none" />
           <div className="absolute bottom-10 left-4 w-20 sm:w-24 h-20 sm:h-24 bg-blue-500/20 rounded-full blur-sm animate-orbit2 pointer-events-none" />
@@ -169,34 +186,29 @@ export default function Hero() {
       </div>
 
       {/* Footer Hero */}
-      <footer className="w-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 mt-auto z-10 transition-colors duration-300">
+      <motion.footer
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="w-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 mt-auto z-10 transition-colors duration-300"
+      >
         <div className="max-w-7xl mx-auto py-8 px-6 sm:px-10 lg:px-14 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="w-full lg:w-[65%]">
-            <p
-              className={`text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed transition-all duration-500 ${
-                showFooter ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-              }`}
-            >
-              {t.hero.footerDesc}
-            </p>
+            <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">{t.hero.footerDesc}</p>
           </div>
 
           <div className="w-full lg:w-[30%] flex flex-col items-center justify-center">
             <a
               href="#about"
-              className={`transition-all duration-500 ${
-                showFooter ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
-              }`}
+              className="px-6 py-3 border border-cyan-500/50 dark:border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg shadow-cyan-500/5"
             >
-              <button className="px-6 py-3 border border-cyan-500/50 dark:border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500 rounded-xl transition-all duration-300 font-semibold text-sm cursor-pointer shadow-lg shadow-cyan-500/5">
-                {t.hero.knowMore}
-              </button>
+              {t.hero.knowMore}
             </a>
 
             <RiArrowDownDoubleFill className="text-2xl text-cyan-500 dark:text-cyan-400 animate-bounce-custom mt-3" />
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </section>
   );
 }

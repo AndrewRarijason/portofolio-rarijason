@@ -1,0 +1,6 @@
+// Script Umami chargé dans app/[lang]/layout.tsx
+interface Window {
+  umami?: {
+    track: (event: string, data?: Record<string, string | number | boolean>) => void;
+  };
+}

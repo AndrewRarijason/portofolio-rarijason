@@ -12,6 +12,9 @@ export const translations = {
       footerDesc:
         "I am Andrew, a developer who believes that well-designed technology drives meaningful progress. Each project is an opportunity to innovate by creating lasting bridges between needs and solutions. My approach focuses on understanding the 'why' before the 'how', collaborating with business teams, and always prioritizing the final user experience.",
       knowMore: "Know more about me",
+      availability: "Available for a full-time role / freelance",
+      viewProjects: "View my projects",
+      downloadCv: "Download my CV",
     },
     about: {
       subtitle: "Background & Expertise",
@@ -67,6 +70,7 @@ export const translations = {
     },
     footer: {
       rights: "Andrew Rarijason Portfolio.",
+      localTime: "Local time",
     },
     projects: {
       badge: "Portfolio",
@@ -75,12 +79,31 @@ export const translations = {
       codeLabel: "Code",
       privateProjectLabel: "Private project",
       detailsLabel: "Details",
+      featured: "Featured project",
+      viewCaseStudy: "Explore the project",
+      filterLabel: "Filter projects",
+      filters: { all: "All", web: "Web", mobile: "Mobile", backend: "Backend" },
+      empty: "No project in this category yet.",
     },
     projectDetails: {
       back: "Back",
       stackLabel: "Stack :",
       viewGithub: "View on GitHub",
       closeLabel: "Close",
+      previous: "Previous project",
+      next: "Next project",
+      allProjects: "All projects",
+    },
+    seo: {
+      title: "Andrew Rarijason — Full Stack Developer (Java, Spring Boot, React, Next.js)",
+      description:
+        "Portfolio of Andrew Rarijason, full stack developer based in Antananarivo, Madagascar. Java/Spring Boot and Node.js back-ends, React/Next.js and Angular front-ends. Available for a full-time role or freelance.",
+      projectSuffix: "Project by Andrew Rarijason",
+    },
+    notFound: {
+      title: "Page not found",
+      desc: "This page does not exist or has been moved.",
+      back: "Back to home",
     },
   },
   fr: {
@@ -96,6 +119,9 @@ export const translations = {
       footerDesc:
         "Je suis Andrew, un développeur convaincu qu'une technologie bien conçue favorise un progrès significatif. Chaque projet est une opportunité d'innover en créant des ponts durables entre les besoins et les solutions. Mon approche se concentre sur la compréhension du 'pourquoi' avant le 'comment', la collaboration avec les équipes métier et la priorité absolue accordée à l'expérience utilisateur finale.",
       knowMore: "En savoir plus sur moi",
+      availability: "Disponible pour un poste / freelance",
+      viewProjects: "Voir mes projets",
+      downloadCv: "Télécharger le CV",
     },
     about: {
       subtitle: "Parcours & Expertise",
@@ -151,6 +177,7 @@ export const translations = {
     },
     footer: {
       rights: "Andrew Rarijason Portfolio.",
+      localTime: "Heure locale",
     },
     projects: {
       badge: "Portfolio",
@@ -159,12 +186,31 @@ export const translations = {
       codeLabel: "Code",
       privateProjectLabel: "Projet privé",
       detailsLabel: "Détails",
+      featured: "Projet phare",
+      viewCaseStudy: "Découvrir le projet",
+      filterLabel: "Filtrer les projets",
+      filters: { all: "Tous", web: "Web", mobile: "Mobile", backend: "Backend" },
+      empty: "Aucun projet dans cette catégorie pour le moment.",
     },
     projectDetails: {
       back: "Retour",
       stackLabel: "Stack :",
       viewGithub: "Voir sur GitHub",
       closeLabel: "Fermer",
+      previous: "Projet précédent",
+      next: "Projet suivant",
+      allProjects: "Tous les projets",
+    },
+    seo: {
+      title: "Andrew Rarijason — Développeur Full Stack (Java, Spring Boot, React, Next.js)",
+      description:
+        "Portfolio d'Andrew Rarijason, développeur full stack basé à Antananarivo, Madagascar. Back-end Java/Spring Boot et Node.js, front-end React/Next.js et Angular. Disponible pour un poste ou en freelance.",
+      projectSuffix: "Projet d'Andrew Rarijason",
+    },
+    notFound: {
+      title: "Page introuvable",
+      desc: "Cette page n'existe pas ou a été déplacée.",
+      back: "Retour à l'accueil",
     },
   },
 };

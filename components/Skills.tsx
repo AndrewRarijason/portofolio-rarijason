@@ -6,6 +6,8 @@ import { GrMysql } from "react-icons/gr";
 import { useEffect, useRef, useState } from "react";
 import { SiPrisma } from "react-icons/si";
 import { useLanguage } from "@/context/LanguageContext";
+import { motion } from "motion/react";
+import Reveal from "@/components/ui/Reveal";
 
 export default function Skills() {
   const { t } = useLanguage();
@@ -138,14 +140,14 @@ export default function Skills() {
         </svg>
       </div>
 
-      <div className="text-center mb-16 relative z-10">
+      <Reveal blur className="text-center mb-16 relative z-10">
         <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">{t.skills.subtitle}</span>
         <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           {t.skills.titleSkills}{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">{t.skills.titleTools}</span>
         </h2>
         <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
-      </div>
+      </Reveal>
 
       {/* Progress Bar interactive */}
       <div ref={progressBarRef} className="hidden lg:flex absolute left-12 flex-col items-center z-20" style={{ width: 16 }}>
@@ -162,14 +164,20 @@ export default function Skills() {
           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-cyan-500 pl-3">{t.skills.usingNow}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 sm:gap-6">
             {usingNowTechs.map((tech, idx) => (
-              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-cyan-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: idx * 0.035, ease: [0.22, 1, 0.36, 1] }}
+                className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-cyan-500/40 hover:scale-105 transition-[border-color,scale] duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
                 {tech.icon ? (
                   <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] transition-all" />
                 ) : (
                   tech.customIcon
                 )}
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -179,14 +187,20 @@ export default function Skills() {
           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-blue-500 pl-3">{t.skills.toolsEnv}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6">
             {otherTechs.map((tech, idx) => (
-              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: idx * 0.035, ease: [0.22, 1, 0.36, 1] }}
+                className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-500/40 hover:scale-105 transition-[border-color,scale] duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
                 {tech.icon ? (
                   <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.4)] transition-all" />
                 ) : (
                   tech.customIcon
                 )}
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -196,10 +210,16 @@ export default function Skills() {
           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-purple-500 pl-3">{t.skills.learning}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4 sm:gap-6">
             {learningTechs.map((tech, idx) => (
-              <div key={idx} className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-purple-500/40 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: idx * 0.035, ease: [0.22, 1, 0.36, 1] }}
+                className="p-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-xl hover:border-purple-500/40 hover:scale-105 transition-[border-color,scale] duration-300 flex flex-col items-center justify-center gap-3 group shadow-md dark:shadow-lg dark:shadow-black/20">
                 <Image src={tech.icon} alt={tech.name} width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.4)] transition-all" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white">{tech.name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

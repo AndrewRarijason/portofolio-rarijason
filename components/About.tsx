@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import Typewriter from "./Typewriter";
 import { GrCertificate } from "react-icons/gr";
 import { useLanguage } from "@/context/LanguageContext";
+import Reveal from "@/components/ui/Reveal";
 
 export default function About() {
   const { t } = useLanguage();
@@ -55,7 +56,7 @@ export default function About() {
 
       <div className="relative z-10 max-w-6xl mx-auto space-y-20 w-full">
         {/* Header */}
-        <div className="text-center">
+        <Reveal blur className="text-center">
           <span className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm tracking-widest uppercase mb-2 block">
             {t.about.subtitle}
           </span>
@@ -66,7 +67,7 @@ export default function About() {
             </span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full" />
-        </div>
+        </Reveal>
 
         {/* SECTION 1: FORMATIONS */}
         <div className="space-y-6">

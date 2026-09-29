@@ -10,12 +10,17 @@ export interface ProjectImage {
   explanation?: LocalizedText;
 }
 
+export type ProjectCategory = "web" | "mobile" | "backend";
+
 export interface ProjectData {
   slug: string;
   title: LocalizedText;
   description?: LocalizedText;
   description_gm: LocalizedText;
-  stack?: string;
+  stack: string[];
+  categories: ProjectCategory[];
+  featured?: boolean;
+  highlights?: LocalizedText[];
   imagebg?: { src: string; alt: LocalizedText };
   images: ProjectImage[];
   github?: string;
@@ -40,14 +45,15 @@ export const projectsData: ProjectData[] = [
       fr: "Il s'agit d'une application CRM développée en Java, gérée avec GitHub. Je l'ai prise en main, y ai ajouté des fonctionnalités importantes, et créé des APIs REST destinées à être consommées par une autre application écrite en C#."
         + " Je présente quelques fonctionnalités essentielles ci-dessous.",
     },
-    stack: "Java, Spring Boot, Hibernate, Thymeleaf, C#, Mysql.",
+    stack: ["Java", "Spring Boot", "Hibernate", "Thymeleaf", "C#", "MySQL"],
+    categories: ["web", "backend"],
     imagebg: {
-      src: "/CRM/crm_analytics.png",
+      src: "/CRM/crm_analytics.webp",
       alt: { en: "Custom Relationship Management Background", fr: "Arrière-plan du CRM" },
     },
     images: [
       {
-        src: "/CRM/java-data_importation.png",
+        src: "/CRM/java-data_importation.webp",
         alt: { en: "Data importation", fr: "Importation de données" },
         caption: { en: "Data file importation into database", fr: "Importation de fichiers dans la base de données" },
         explanation: {
@@ -56,7 +62,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/java-user_list.png",
+        src: "/CRM/java-user_list.webp",
         alt: { en: "User list", fr: "Liste des utilisateurs" },
         caption: { en: "User list", fr: "Liste des utilisateurs" },
         explanation: {
@@ -65,7 +71,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/java-customer_list.png",
+        src: "/CRM/java-customer_list.webp",
         alt: { en: "Customer list", fr: "Liste des clients" },
         caption: { en: "Customer list", fr: "Liste des clients" },
         explanation: {
@@ -74,7 +80,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/dotnet-budget_statistics.png",
+        src: "/CRM/dotnet-budget_statistics.webp",
         alt: { en: "Budget statistics", fr: "Statistiques budgétaires" },
         caption: { en: "Budget statistics", fr: "Statistiques budgétaires" },
         explanation: {
@@ -83,7 +89,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/dotnet-distribution_of_expenses.png",
+        src: "/CRM/dotnet-distribution_of_expenses.webp",
         alt: { en: "Distribution of expenses", fr: "Répartition des dépenses" },
         caption: { en: "Distribution of expenses", fr: "Répartition des dépenses" },
         explanation: {
@@ -92,7 +98,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/dotnet-importation.png",
+        src: "/CRM/dotnet-importation.webp",
         alt: { en: "CSV file importation in C#", fr: "Importation de fichier CSV en C#" },
         caption: { en: "CSV file importation in C#", fr: "Importation de fichier CSV en C#" },
         explanation: {
@@ -101,7 +107,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/CRM/dotnet-budget_list.png",
+        src: "/CRM/dotnet-budget_list.webp",
         alt: { en: "Budget list", fr: "Liste des budgets" },
         caption: { en: "Budget list", fr: "Liste des budgets" },
         explanation: {
@@ -135,14 +141,15 @@ export const projectsData: ProjectData[] = [
         + " L'objectif est de générer un fichier CSV contenant les écritures comptables de chaque compte en devise (intérêts créditeurs/débiteurs, frais de découvert, TVA, ...). Le fichier généré est ensuite utilisé par le système Core Banking pour la comptabilisation des comptes."
         + " Il y a également la génération de fichiers PDF envoyés par email au client pour l'informer du montant débité de son compte.",
     },
-    stack: "Java, Spring Boot, React TypeScript, Tailwind CSS, Oracle Database.",
+    stack: ["Java", "Spring Boot", "React", "TypeScript", "Tailwind CSS", "Oracle Database"],
+    categories: ["web", "backend"],
     imagebg: {
-      src: "/internship/account_closing.png",
+      src: "/internship/account_closing.webp",
       alt: { en: "Processing Tool Background", fr: "Arrière-plan de l'outil de traitement" },
     },
     images: [
       {
-        src: "/internship/login_page.png",
+        src: "/internship/login_page.webp",
         alt: { en: "Login page", fr: "Page de connexion" },
         caption: { en: "Login page", fr: "Page de connexion" },
         explanation: {
@@ -151,7 +158,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/users.png",
+        src: "/internship/users.webp",
         alt: { en: "Users management", fr: "Gestion des utilisateurs" },
         caption: { en: "Users management", fr: "Gestion des utilisateurs" },
         explanation: {
@@ -160,7 +167,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/import-section.png",
+        src: "/internship/import-section.webp",
         alt: { en: "Data extraction and import section", fr: "Section d'extraction et d'import de données" },
         caption: { en: "Data extraction and import section", fr: "Section d'extraction et d'import de données" },
         explanation: {
@@ -171,7 +178,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/account-verification.png",
+        src: "/internship/account-verification.webp",
         alt: { en: "Account verification process", fr: "Processus de vérification des comptes" },
         caption: { en: "Account verification process", fr: "Processus de vérification des comptes" },
         explanation: {
@@ -182,7 +189,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/dashboard.png",
+        src: "/internship/dashboard.webp",
         alt: { en: "Dashboard", fr: "Tableau de bord" },
         caption: { en: "Dashboard", fr: "Tableau de bord" },
         explanation: {
@@ -191,7 +198,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/stats.png",
+        src: "/internship/stats.webp",
         alt: { en: "Statistics", fr: "Statistiques" },
         caption: { en: "Statistics", fr: "Statistiques" },
         explanation: {
@@ -200,7 +207,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/history.png",
+        src: "/internship/history.webp",
         alt: { en: "Account closing history", fr: "Historique de clôture des comptes" },
         caption: { en: "Account closing history", fr: "Historique de clôture des comptes" },
         explanation: {
@@ -209,7 +216,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/internship/pdf-generation.png",
+        src: "/internship/pdf-generation.webp",
         alt: { en: "Generated PDF for the client", fr: "PDF généré pour le client" },
         caption: { en: "Generated PDF for the client", fr: "PDF généré pour le client" },
         explanation: {
@@ -240,14 +247,15 @@ export const projectsData: ProjectData[] = [
         + " Le back-end utilise Firebase pour l'authentification et Firestore comme base de données en temps réel."
         + " Il s'agit d'une simulation, liée à une version web.",
     },
-    stack: "React Native, TypeScript, Firestore.",
+    stack: ["React Native", "TypeScript", "Firebase", "Firestore"],
+    categories: ["mobile"],
     imagebg: {
-      src: "/Crypto/crypto.png",
+      src: "/Crypto/crypto.webp",
       alt: { en: "Cryptocurrency Mobile Application Background", fr: "Arrière-plan de l'application crypto" },
     },
     images: [
       {
-        src: "/Crypto/crypto_list.png",
+        src: "/Crypto/crypto_list.webp",
         alt: { en: "Cryptocurrency Mobile Application", fr: "Application mobile de cryptomonnaie" },
         caption: { en: "List of cryptocurrencies on the server", fr: "Liste des cryptomonnaies sur le serveur" },
         explanation: {
@@ -256,7 +264,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Crypto/crypto_variation.png",
+        src: "/Crypto/crypto_variation.webp",
         alt: { en: "Transactions", fr: "Transactions" },
         caption: { en: "Cryptocurrencies variation", fr: "Variation des cryptomonnaies" },
         explanation: {
@@ -265,7 +273,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Crypto/deposit-withdrawal.png",
+        src: "/Crypto/deposit-withdrawal.webp",
         alt: { en: "deposit-withdrawal", fr: "dépôt-retrait" },
         caption: { en: "Deposit/withdrawal", fr: "Dépôt / retrait" },
         explanation: {
@@ -274,7 +282,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Crypto/personal-wallet.png",
+        src: "/Crypto/personal-wallet.webp",
         alt: { en: "Personal-wallet", fr: "Portefeuille personnel" },
         caption: { en: "Personal wallet", fr: "Portefeuille personnel" },
         explanation: {
@@ -283,7 +291,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Crypto/profile-update.png",
+        src: "/Crypto/profile-update.webp",
         alt: { en: "Profile update", fr: "Mise à jour du profil" },
         caption: { en: "Profile update", fr: "Mise à jour du profil" },
         explanation: {
@@ -311,14 +319,15 @@ export const projectsData: ProjectData[] = [
       en: "The project implements a web framework based on the MVC (Model-View-Controller) pattern in Java, allowing for a clear separation of business logic, view management, and HTTP request control.",
       fr: "Le projet implémente un framework web basé sur le pattern MVC (Modèle-Vue-Contrôleur) en Java, permettant une séparation claire entre la logique métier, la gestion des vues et le contrôle des requêtes HTTP.",
     },
-    stack: "Java, Servlet.",
+    stack: ["Java", "Servlet", "JSP"],
+    categories: ["backend"],
     imagebg: {
-      src: "/Framework/framework.png",
+      src: "/Framework/framework.webp",
       alt: { en: "Custom Java Framework Background", fr: "Arrière-plan du framework Java" },
     },
     images: [
       {
-        src: "/Framework/FrontController-ProcessRequest.png",
+        src: "/Framework/FrontController-ProcessRequest.webp",
         alt: { en: "REST support and data export", fr: "Support REST et export de données" },
         caption: { en: "REST support and data export", fr: "Support REST et export de données" },
         explanation: {
@@ -327,7 +336,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Framework/FrontController-ValidationException.png",
+        src: "/Framework/FrontController-ValidationException.webp",
         alt: { en: "Centralized validation and error management", fr: "Validation et gestion d'erreurs centralisées" },
         caption: { en: "Centralized validation and error management", fr: "Validation et gestion d'erreurs centralisées" },
         explanation: {
@@ -336,7 +345,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Framework/Utils-GetArgs.png",
+        src: "/Framework/Utils-GetArgs.webp",
         alt: { en: "Automatic parameter injection", fr: "Injection automatique des paramètres" },
         caption: { en: "Automatic parameter injections", fr: "Injection automatique des paramètres" },
         explanation: {
@@ -345,7 +354,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Framework/FrontController-init.png",
+        src: "/Framework/FrontController-init.webp",
         alt: { en: "Automatic controller discovery", fr: "Découverte automatique des contrôleurs" },
         caption: { en: "Automatic controller discovery", fr: "Découverte automatique des contrôleurs" },
         explanation: {
@@ -354,7 +363,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/Framework/FrontController-PR-response.png",
+        src: "/Framework/FrontController-PR-response.webp",
         alt: { en: "Unified Response Management", fr: "Gestion unifiée des réponses" },
         caption: { en: "Unified Response Management", fr: "Gestion unifiée des réponses" },
         explanation: {
@@ -382,14 +391,22 @@ export const projectsData: ProjectData[] = [
       en: "A solution for managing your vehicle fleet, featuring maintenance tracking, automated alerts, and mileage management. Below, I'll outline some key features.",
       fr: "Une solution pour gérer votre flotte de véhicules, avec suivi de la maintenance, alertes automatisées et gestion du kilométrage. Je présente ci-dessous quelques fonctionnalités clés.",
     },
-    stack: "Node.js, Express.js, Prisma, Next TypeScript, Tailwind CSS, PostgreSQL",
+    stack: ["Next.js", "TypeScript", "Node.js", "Express.js", "Prisma", "PostgreSQL", "Tailwind CSS"],
+    categories: ["web", "backend"],
+    featured: true,
+    highlights: [
+      { en: "KPI dashboards for the fleet and maintenance", fr: "Tableaux de bord KPI flotte et maintenance" },
+      { en: "Preventive maintenance alerts based on mileage", fr: "Alertes de maintenance préventive selon le kilométrage" },
+      { en: "Inspection checklists exported to PDF", fr: "Fiches de contrôle exportées en PDF" },
+      { en: "Automated email notifications at every step", fr: "Notifications email automatiques à chaque étape" },
+    ],
     imagebg: {
-      src: "/parcflow/parcflow.jpg",
+      src: "/parcflow/parcflow.webp",
       alt: { en: "Parcflow Website Background", fr: "Arrière-plan du site Parcflow" },
     },
     images: [
       {
-        src: "/parcflow/kpi-global.png",
+        src: "/parcflow/kpi-global.webp",
         alt: { en: "Parcflow - KPI global", fr: "Parcflow - KPI global" },
         caption: { en: "KPI Global", fr: "KPI global" },
         explanation: {
@@ -398,7 +415,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/courbe-duree-intervention.png",
+        src: "/parcflow/courbe-duree-intervention.webp",
         alt: { en: "Parcflow - Duration maintenance tasks", fr: "Parcflow - Durée des tâches de maintenance" },
         caption: { en: "Duration maintenance tasks", fr: "Durée des tâches de maintenance" },
         explanation: {
@@ -407,7 +424,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/suivi-demandes.png",
+        src: "/parcflow/suivi-demandes.webp",
         alt: { en: "Parcflow - Tracking vehicle in maintenance", fr: "Parcflow - Suivi d'un véhicule en maintenance" },
         caption: { en: "Vehicle tracking during maintenance", fr: "Suivi du véhicule pendant la maintenance" },
         explanation: {
@@ -416,7 +433,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/my-vehicle.png",
+        src: "/parcflow/my-vehicle.webp",
         alt: { en: "Parcflow - My Vehicle", fr: "Parcflow - Mon véhicule" },
         caption: { en: "My Vehicle", fr: "Mon véhicule" },
         explanation: {
@@ -425,7 +442,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/controle-vehicule.png",
+        src: "/parcflow/controle-vehicule.webp",
         alt: { en: "Parcflow - Vehicle inspection", fr: "Parcflow - Inspection du véhicule" },
         caption: { en: "Vehicle inspection", fr: "Inspection du véhicule" },
         explanation: {
@@ -434,7 +451,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/fiche-controle.png",
+        src: "/parcflow/fiche-controle.webp",
         alt: { en: "Parcflow - Vehicle checklist", fr: "Parcflow - Fiche de contrôle du véhicule" },
         caption: { en: "Vehicle checklist", fr: "Fiche de contrôle du véhicule" },
         explanation: {
@@ -443,7 +460,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/historique-ravitaillement.png",
+        src: "/parcflow/historique-ravitaillement.webp",
         alt: { en: "Parcflow - Fuel history", fr: "Parcflow - Historique de ravitaillement" },
         caption: { en: "Fuel history", fr: "Historique de ravitaillement" },
         explanation: {
@@ -452,7 +469,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/tdb-ravitaillement.png",
+        src: "/parcflow/tdb-ravitaillement.webp",
         alt: { en: "Parcflow - Dashboard refueling", fr: "Parcflow - Tableau de bord ravitaillement" },
         caption: { en: "Dashboard refueling", fr: "Tableau de bord ravitaillement" },
         explanation: {
@@ -461,7 +478,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/parcflow/mail-kilometrage.png",
+        src: "/parcflow/mail-kilometrage.webp",
         alt: { en: "Parcflow - Email alert", fr: "Parcflow - Alerte par email" },
         caption: { en: "Email alert", fr: "Alerte par email" },
         explanation: {
@@ -488,14 +505,15 @@ export const projectsData: ProjectData[] = [
       en: "Website developed using WordPress. It includes a product and services page, a blog section, and a contact form.",
       fr: "Site web développé avec WordPress. Il comprend une page produits et services, une section blog, et un formulaire de contact.",
     },
-    stack: "WordPress, PHP, Mysql.",
+    stack: ["WordPress", "PHP", "MySQL"],
+    categories: ["web"],
     imagebg: {
-      src: "/manafides/website.png",
+      src: "/manafides/website.webp",
       alt: { en: "Manafides Website Background", fr: "Arrière-plan du site Manafides" },
     },
     images: [
       {
-        src: "/manafides/website-mobile.png",
+        src: "/manafides/website-mobile.webp",
         alt: { en: "Mobile version", fr: "Version mobile" },
         caption: { en: "Mobile version", fr: "Version mobile" },
         explanation: {
@@ -504,7 +522,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/manafides/website-bilingue.png",
+        src: "/manafides/website-bilingue.webp",
         alt: { en: "Bilingual website", fr: "Site bilingue" },
         caption: { en: "Bilingual website", fr: "Site bilingue" },
         explanation: {
@@ -513,7 +531,7 @@ export const projectsData: ProjectData[] = [
         },
       },
       {
-        src: "/manafides/website-hosting.png",
+        src: "/manafides/website-hosting.webp",
         alt: { en: "Website hosting", fr: "Hébergement du site" },
         caption: { en: "Website hosting", fr: "Hébergement du site" },
         explanation: {
