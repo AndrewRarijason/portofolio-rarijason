@@ -16,6 +16,7 @@ const MAX_BADGES = 4;
 
 // Met à jour la position du halo lumineux qui suit la souris sur une carte
 function trackPointer(e: React.PointerEvent<HTMLElement>) {
+  if (e.pointerType !== "mouse") return;
   const rect = e.currentTarget.getBoundingClientRect();
   e.currentTarget.style.setProperty("--x", `${e.clientX - rect.left}px`);
   e.currentTarget.style.setProperty("--y", `${e.clientY - rect.top}px`);
@@ -259,8 +260,8 @@ export default function Projects() {
       </div>
 
       {/* Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
+      <div className="absolute bottom-10 right-10 w-[400px] h-[400px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(37_99_235/0.13),transparent)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <Reveal blur className="text-center mb-10">

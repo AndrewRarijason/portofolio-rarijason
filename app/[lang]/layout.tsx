@@ -18,6 +18,8 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  // Utilisée seulement pour l'heure du footer : pas besoin de la précharger
+  preload: false,
 });
 
 export const dynamicParams = false;

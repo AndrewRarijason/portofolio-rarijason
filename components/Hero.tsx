@@ -1,28 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { motion, type Variants } from "motion/react";
+import type { CSSProperties } from "react";
 import { FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { RiArrowDownDoubleFill, RiArrowRightLine } from "react-icons/ri";
 import { useLanguage } from "@/context/LanguageContext";
 import { cvPath } from "@/lib/i18n";
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-    transitionEnd: { filter: "none" },
-  },
-};
+// Rang dans la cascade d'entrée du Hero (voir .hero-in dans globals.css)
+const stagger = (i: number) => ({ "--i": i }) as CSSProperties;
 
 const socialLinkClass =
   "p-3 bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 rounded-xl hover:border-cyan-500/50 hover:text-cyan-500 dark:hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300 hover:-translate-y-1 shadow-sm";
@@ -37,8 +24,8 @@ export default function Hero() {
       id="home"
     >
       {/* Glow Orbs légers en arrière-plan */}
-      <div className="absolute top-20 left-10 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-cyan-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute top-1/2 right-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-20 left-10 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
+      <div className="absolute top-1/2 right-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(37_99_235/0.13),transparent)]" />
 
       {/* --- VECTEUR HERO (SVG) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
@@ -78,13 +65,13 @@ export default function Hero() {
       <div className="flex flex-col lg:flex-row flex-1 max-w-7xl mx-auto w-full px-6 sm:px-10 lg:px-14 items-center z-10">
         {/* Colonne gauche : Présentation */}
         <div className="w-full lg:w-[60%] flex flex-col justify-center py-12">
-          <motion.div className="flex flex-col items-start space-y-5" variants={container} initial="hidden" animate="show">
+          <div className="flex flex-col items-start space-y-5">
             {/* Badge de disponibilité */}
-            <motion.a
-              variants={item}
+            <a
               href="#contact"
+              style={stagger(0)}
               data-umami-event="hero-availability"
-              className="group inline-flex items-center gap-2.5 pl-2.5 pr-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-md hover:border-emerald-500/60 transition-colors"
+              className="hero-in group inline-flex items-center gap-2.5 pl-2.5 pr-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-md hover:border-emerald-500/60 transition-colors"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
@@ -92,31 +79,31 @@ export default function Hero() {
               </span>
               {t.hero.availability}
               <RiArrowRightLine className="transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
+            </a>
 
-            <motion.span
-              variants={item}
-              className="text-cyan-600 dark:text-cyan-400 font-semibold tracking-wide uppercase text-sm sm:text-base"
+            <span
+              style={stagger(1)}
+              className="hero-in text-cyan-600 dark:text-cyan-400 font-semibold tracking-wide uppercase text-sm sm:text-base"
             >
               {t.hero.greeting}
-            </motion.span>
+            </span>
 
-            <motion.h1
-              variants={item}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight"
+            <h1
+              style={stagger(2)}
+              className="hero-in text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight"
             >
               Aiky Andrew <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 dark:from-cyan-400 dark:via-teal-300 dark:to-blue-500 bg-[length:200%_auto] animate-gradient-x">
                 RARIJASON
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p variants={item} className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 font-medium">
+            <p style={stagger(3)} className="hero-in text-lg sm:text-xl text-slate-600 dark:text-slate-400 font-medium">
               {t.hero.role}
-            </motion.p>
+            </p>
 
             {/* Appels à l'action */}
-            <motion.div variants={item} className="pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div style={stagger(4)} className="hero-in pt-2 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
                 href="#projects"
                 data-umami-event="hero-view-projects"
@@ -137,9 +124,9 @@ export default function Hero() {
                 <FaDownload className="transition-transform group-hover:translate-y-0.5" />
                 {t.hero.downloadCv}
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div variants={item} className="pt-2 flex flex-row gap-3">
+            <div style={stagger(5)} className="hero-in pt-2 flex flex-row gap-3">
               <a href="https://github.com/AndrewRarijason" target="_blank" rel="noopener noreferrer" className={socialLinkClass} aria-label="GitHub" data-umami-event="social-github">
                 <FaGithub className="text-lg" />
               </a>
@@ -149,22 +136,17 @@ export default function Hero() {
               <a href="mailto:rarijasonaiky@gmail.com" className={socialLinkClass} aria-label="Email" data-umami-event="social-email">
                 <IoIosMail className="text-lg" />
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* Colonne droite : Photo + Bulles animées */}
         <div className="w-full lg:w-[40%] flex items-center justify-center relative py-12">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10"
-          >
+          <div className="hero-pop relative z-10">
             {/* Anneau dégradé en rotation */}
-            <div className="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,#06b6d4,#3b82f6,#2dd4bf,transparent_70%,#06b6d4)] animate-spin-slow opacity-80 blur-[1px]" />
+            <div className="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,#06b6d4,#3b82f6,#2dd4bf,transparent_70%,#06b6d4)] animate-spin-slow opacity-80" />
             <div className="relative p-2 rounded-full bg-slate-50 dark:bg-[#0F172A]">
-              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
+              <div className="animate-float">
                 <Image
                   src="/andrew.webp"
                   alt="Andrew Rarijason"
@@ -175,9 +157,9 @@ export default function Hero() {
                   className="rounded-full object-cover w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[310px] lg:h-[310px]"
                   priority
                 />
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           <div className="absolute top-6 right-6 w-24 sm:w-32 h-24 sm:h-32 bg-cyan-500/20 rounded-full blur-sm animate-orbit1 pointer-events-none" />
           <div className="absolute bottom-10 left-4 w-20 sm:w-24 h-20 sm:h-24 bg-blue-500/20 rounded-full blur-sm animate-orbit2 pointer-events-none" />
@@ -186,11 +168,9 @@ export default function Hero() {
       </div>
 
       {/* Footer Hero */}
-      <motion.footer
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 mt-auto z-10 transition-colors duration-300"
+      <footer
+        style={stagger(5)}
+        className="hero-in w-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 mt-auto z-10 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto py-8 px-6 sm:px-10 lg:px-14 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="w-full lg:w-[65%]">
@@ -208,7 +188,7 @@ export default function Hero() {
             <RiArrowDownDoubleFill className="text-2xl text-cyan-500 dark:text-cyan-400 animate-bounce-custom mt-3" />
           </div>
         </div>
-      </motion.footer>
+      </footer>
     </section>
   );
 }

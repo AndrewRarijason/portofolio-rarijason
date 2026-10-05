@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { IoIosArrowDropup, IoIosMail } from "react-icons/io";
 import { IoSendSharp } from "react-icons/io5";
-import emailjs from "@emailjs/browser";
 import { useLanguage } from "@/context/LanguageContext";
 import Reveal from "@/components/ui/Reveal";
 
@@ -27,7 +26,7 @@ export default function Contact() {
       const rect = homeSection.getBoundingClientRect();
       setShowArrow(rect.top < -50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -44,18 +43,20 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRef.current) return;
+    const form = formRef.current;
+    if (!form) return;
     setSending(true);
     setSent(null);
 
-    emailjs
-      .sendForm("service_64209gq", "template_unjcm1o", formRef.current, "fZwRVO-t4y74AxE6l")
+    // EmailJS n'est téléchargé qu'au moment de l'envoi, pas au chargement de la page
+    import("@emailjs/browser")
+      .then(({ default: emailjs }) => emailjs.sendForm("service_64209gq", "template_unjcm1o", form, "fZwRVO-t4y74AxE6l"))
       .then(
         () => {
           setSending(false);
           setSent("ok");
           window.umami?.track("contact-sent");
-          formRef.current?.reset();
+          form.reset();
           setFirstName("");
           setLastName("");
         },
@@ -70,7 +71,7 @@ export default function Contact() {
     <section id="contact" className="relative overflow-hidden py-28 px-4 sm:px-6 md:px-12 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 transition-colors duration-300">
       
       {/* Glow Orb */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
 
       {/* --- VECTEUR CONTACT --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">

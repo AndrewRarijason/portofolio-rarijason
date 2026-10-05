@@ -19,7 +19,6 @@ export default function Typewriter({ text = "", start = false, speed = 12, class
   return (
     <span className={className}>
       {typed}
-      <span className="animate-pulse"></span>
     </span>
   );
 }

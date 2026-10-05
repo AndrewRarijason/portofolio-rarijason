@@ -9,7 +9,7 @@ export default function NotFound() {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] pointer-events-none bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}

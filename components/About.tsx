@@ -50,9 +50,9 @@ export default function About() {
     <section id="about" className="relative overflow-hidden py-28 px-4 sm:px-6 md:px-12 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-center transition-colors duration-300" ref={sectionRef}>
       
       {/* Background Continuous Orbs */}
-      <div className="absolute top-12 left-10 w-72 sm:w-96 h-72 sm:h-96 bg-cyan-500/10 dark:bg-cyan-500/15 rounded-full blur-[120px] animate-orbit1 pointer-events-none z-0" />
-      <div className="absolute bottom-12 right-10 w-80 sm:w-[450px] h-80 sm:h-[450px] bg-blue-600/10 dark:bg-blue-600/15 rounded-full blur-[130px] animate-orbit2 pointer-events-none z-0" />
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-teal-400/10 rounded-full blur-[100px] animate-orbit3 pointer-events-none z-0" />
+      <div className="absolute top-12 left-10 w-72 sm:w-96 h-72 sm:h-96 animate-orbit1 pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.195),transparent)]" />
+      <div className="absolute bottom-12 right-10 w-80 sm:w-[450px] h-80 sm:h-[450px] animate-orbit2 pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(37_99_235/0.195),transparent)]" />
+      <div className="absolute top-1/2 left-1/3 w-64 h-64 animate-orbit3 pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(45_212_191/0.13),transparent)]" />
 
       <div className="relative z-10 max-w-6xl mx-auto space-y-20 w-full">
         {/* Header */}

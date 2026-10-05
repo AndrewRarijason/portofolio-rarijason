@@ -19,8 +19,14 @@ export default function Skills() {
   const points = [0, 0.45, 0.85];
 
   useEffect(() => {
-    function handleScroll() {
-      if (!iconsRef.current || !progressBarRef.current) return;
+    // La barre n'est affichée qu'à partir de lg : inutile de recalculer (et de re-rendre
+    // les 27 cartes) à chaque défilement sur téléphone.
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    let frame = 0;
+
+    function update() {
+      frame = 0;
+      if (!desktop.matches || !iconsRef.current || !progressBarRef.current) return;
       const barRect = progressBarRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
@@ -39,12 +45,20 @@ export default function Skills() {
 
       let prog = (centerY - barTop) / barHeight;
       prog = Math.max(0, Math.min(1, prog));
-      setProgress(prog);
+      // Arrondi : évite un nouveau rendu pour des variations invisibles
+      setProgress(Math.round(prog * 200) / 200);
     }
+
+    // Un seul calcul par image affichée, même si le navigateur envoie plus d'événements
+    function handleScroll() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
     handleScroll();
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
@@ -98,7 +112,7 @@ export default function Skills() {
     <section id="skills" className="relative overflow-hidden py-28 px-4 sm:px-6 bg-slate-50 dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300" ref={sectionRef}>
       
       {/* Background Orbs */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
 
       {/* --- VECTEURS ET LIGNES ANIMÉS EN ARRIÈRE-PLAN --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">

@@ -69,12 +69,13 @@ export default function ProjectDetails({ project, prev, next }: ProjectDetailPro
     <section className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-12 text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-[#0F172A] min-h-screen transition-colors duration-300">
 
       {/* Glow Orbs */}
-      <div className="absolute top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute top-[800px] right-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute top-[1600px] left-10 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
+      <div className="absolute top-[800px] right-10 w-[500px] h-[500px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(37_99_235/0.13),transparent)]" />
+      <div className="absolute top-[1600px] left-10 w-[600px] h-[600px] pointer-events-none z-0 bg-[radial-gradient(closest-side,rgb(6_182_212/0.13),transparent)]" />
 
-      {/* --- ENSEMBLE DE VECTEURS ANIMÉS --- */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
+      {/* --- ENSEMBLE DE VECTEURS ANIMÉS ---
+          Masqué sur mobile : ce SVG fait toute la hauteur de la page (~9 000 px) */}
+      <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none opacity-30 dark:opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="projectGrad1" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -230,8 +231,8 @@ export default function ProjectDetails({ project, prev, next }: ProjectDetailPro
         )}
       </AnimatePresence>
 
-      {/* Conteneur principal Glassmorphic */}
-      <Reveal className="relative z-10 max-w-5xl mx-auto mt-12 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-12 shadow-xl transition-colors duration-300">
+      {/* Conteneur principal : très haut, donc ni flou d'arrière-plan ni transformation animée (trop coûteux sur mobile) */}
+      <div className="fade-in relative z-10 max-w-5xl mx-auto mt-12 bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-12 shadow-xl transition-colors duration-300">
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white text-center tracking-tight mb-8">
           {title[language]}
         </h1>
@@ -313,7 +314,7 @@ export default function ProjectDetails({ project, prev, next }: ProjectDetailPro
             </span>
           )}
         </div>
-      </Reveal>
+      </div>
 
       {/* Navigation projet précédent / suivant */}
       <nav aria-label={dict.allProjects} className="relative z-10 max-w-5xl mx-auto mt-10">
