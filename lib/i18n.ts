@@ -13,7 +13,7 @@ export const ogLocale: Record<Language, string> = { en: "en_US", fr: "fr_FR" };
 
 export const cvPath: Record<Language, string> = {
   en: "/cv/Resume_AndrewRarijason.pdf",
-  fr: "/cv/CV_AndrewRarijason.pdf",
+  fr: "/cv/AndrewRarijason_CurriculumVitae.pdf",
 };
 
 // Remplace le préfixe de langue d'un chemin : /en/projects/crm -> /fr/projects/crm

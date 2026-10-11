@@ -208,8 +208,8 @@ export default function Contact() {
               </div>
 
               <a
-                href={cvLanguage === "en" ? "/cv/Resume_AndrewRarijason.pdf" : "/cv/CV_AndrewRarijason.pdf"}
-                download={cvLanguage === "en" ? "Resume_AndrewRarijason.pdf" : "CV_AndrewRarijason.pdf"}
+                href={cvLanguage === "en" ? "/cv/Resume_AndrewRarijason.pdf" : "/cv/AndrewRarijason_CurriculumVitae.pdf"}
+                download={cvLanguage === "en" ? "Resume_AndrewRarijason.pdf" : "AndrewRarijason_CurriculumVitae.pdf"}
                 data-umami-event="cv-download"
                 data-umami-event-lang={cvLanguage}
                 data-umami-event-location="contact"
